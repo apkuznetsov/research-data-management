@@ -58,6 +58,7 @@ public final class DdsssModels {
                 internal_static_baeldung_Student_PhoneNumber_descriptor,
                 new java.lang.String[]{"Number", "Type",});
     }
+
     private DdsssModels() {
     }
 
@@ -75,6 +76,7 @@ public final class DdsssModels {
     getDescriptor() {
         return descriptor;
     }
+
     public interface CourseOrBuilder extends
             // @@protoc_insertion_point(interface_extends:baeldung.Course)
             com.google.protobuf.MessageOrBuilder {
@@ -252,6 +254,7 @@ public final class DdsssModels {
         private Course(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
             super(builder);
         }
+
         private Course() {
             courseName_ = "";
             student_ = java.util.Collections.emptyList();
@@ -596,7 +599,7 @@ public final class DdsssModels {
                     .equals(other.getCourseName())) return false;
             if (!getStudentList()
                     .equals(other.getStudentList())) return false;
-          return unknownFields.equals(other.unknownFields);
+            return unknownFields.equals(other.unknownFields);
         }
 
         @java.lang.Override
@@ -1287,6 +1290,7 @@ public final class DdsssModels {
         private volatile java.lang.Object email_;
         private java.util.List<ssau.kuznetsov.protobuf.DdsssModels.Student.PhoneNumber> phone_;
         private byte memoizedIsInitialized = -1;
+
         // Use Student.newBuilder() to construct.
         private Student(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
             super(builder);
@@ -1744,7 +1748,7 @@ public final class DdsssModels {
                     .equals(other.getEmail())) return false;
             if (!getPhoneList()
                     .equals(other.getPhoneList())) return false;
-          return unknownFields.equals(other.unknownFields);
+            return unknownFields.equals(other.unknownFields);
         }
 
         @java.lang.Override
@@ -1973,6 +1977,7 @@ public final class DdsssModels {
             private volatile java.lang.Object number_;
             private int type_;
             private byte memoizedIsInitialized = -1;
+
             // Use PhoneNumber.newBuilder() to construct.
             private PhoneNumber(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
                 super(builder);
@@ -2270,7 +2275,7 @@ public final class DdsssModels {
                 if (!getNumber()
                         .equals(other.getNumber())) return false;
                 if (type_ != other.type_) return false;
-              return unknownFields.equals(other.unknownFields);
+                return unknownFields.equals(other.unknownFields);
             }
 
             @java.lang.Override

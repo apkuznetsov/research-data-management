@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ssau.kuznetsov.server;
+package ssau.kuznetsov.routeguide;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.protobuf.Message;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ssau.kuznetsov.server;
+package ssau.kuznetsov.routeguide;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;

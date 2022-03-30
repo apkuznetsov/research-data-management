@@ -1,4 +1,4 @@
-package ssau.kuznetsov.server;
+package ssau.kuznetsov.routeguide;
 
 import com.google.protobuf.util.JsonFormat;
 import ssau.kuznetsov.proto.Feature;

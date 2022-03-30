@@ -26,7 +26,7 @@ public class RouteGuideUtil {
     }
 
     public static URL getDefaultFeaturesFile() {
-        return RouteGuideServer.class.getResource("route_guide_db.json");
+        return RouteGuideServer.class.getResource("/route_guide_db.json");
     }
 
     public static List<Feature> parseFeatures(URL file) throws IOException {

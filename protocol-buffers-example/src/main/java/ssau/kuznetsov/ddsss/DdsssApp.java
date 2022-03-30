@@ -19,11 +19,15 @@ public class DdsssApp {
         SpringApplication.run(DdsssApp.class, args);
     }
 
+    // the first one takes advantage of the RestTemplate API
+    // with a pre-configured ProtobufHttpMessageConverter bean to automatically convert messages.
     @Bean
     RestTemplate restTemplate(ProtobufHttpMessageConverter hmc) {
         return new RestTemplate(List.of(hmc));
     }
 
+    // the ProtobufHttpMessageConverter bean is used to convert responses
+    // returned by @RequestMapping annotated methods to protocol buffer message
     @Bean
     ProtobufHttpMessageConverter protobufHttpMessageConverter() {
         return new ProtobufHttpMessageConverter();

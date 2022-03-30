@@ -55,6 +55,8 @@ public class DdsssIntegrationTest {
         return httpResponse.getEntity().getContent();
     }
 
+    // the second is using protobuf-java-format
+    // to manually transform protocol buffer responses into JSON documents
     private String convertProtobufMessageStreamToJsonString(InputStream protobufStream) throws IOException {
         JsonFormat jsonFormat = new JsonFormat();
         Course course = Course.parseFrom(protobufStream);

@@ -31,9 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-*/.mvn/wrapper/
-*/protoc.exe
-
-protocol-buffers-example/src/main/protoc.exe
-grpc-example/src/main/protoc.exe

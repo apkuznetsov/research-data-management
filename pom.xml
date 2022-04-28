@@ -24,6 +24,7 @@
     </properties>
 
     <modules>
+        <module>ddss-domain</module>
         <module>ddss-security</module>
     </modules>
 

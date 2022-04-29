@@ -20,7 +20,9 @@
     <description>ddss</description>
 
     <properties>
-        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <ddss.version>${project.version}</ddss.version>
     </properties>
 
     <modules>

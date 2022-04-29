@@ -1,4 +1,4 @@
-package ssau.kuznetsov.ddssdomain;
+package ddss.domain;
 
 import lombok.Getter;
 import lombok.Setter;

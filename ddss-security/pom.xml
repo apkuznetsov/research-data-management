@@ -21,6 +21,16 @@
 
     <dependencies>
         <!-- DDSS dependencies -->
+        <dependency>
+            <groupId>ssau.kuznetsov</groupId>
+            <artifactId>ddss-data</artifactId>
+            <version>${ddss.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ssau.kuznetsov</groupId>
+            <artifactId>ddss-domain</artifactId>
+            <version>${ddss.version}</version>
+        </dependency>
 
         <!-- necessary Boot starters -->
         <dependency>

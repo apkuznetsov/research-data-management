@@ -23,7 +23,7 @@ public class RegistrationController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<RegistrationForm> processRegistration(RegistrationForm form) {
+    public ResponseEntity<RegistrationForm> register(RegistrationForm form) {
         DeviceUser foundUser = userRepo.findByUsername(form.getUsername());
         if (foundUser == null) {
             userRepo.save(form.toDeviceUser(passwordEncoder));

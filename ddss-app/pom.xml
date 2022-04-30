@@ -10,17 +10,16 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ddss-security</artifactId>
+    <artifactId>ddss-app</artifactId>
     <packaging>jar</packaging>
-    <name>ddss-security</name>
-    <description>ddss-security</description>
+    <name>ddss-app</name>
+    <description>ddss-app</description>
 
     <properties>
         <java.version>11</java.version>
     </properties>
 
     <dependencies>
-        <!-- DDSS dependencies -->
         <dependency>
             <groupId>ssau.kuznetsov</groupId>
             <artifactId>ddss-data</artifactId>
@@ -31,26 +30,20 @@
             <artifactId>ddss-domain</artifactId>
             <version>${ddss.version}</version>
         </dependency>
-
-        <!-- necessary Boot starters -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- test dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>ssau.kuznetsov</groupId>
+            <artifactId>ddss-security</artifactId>
+            <version>${ddss.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

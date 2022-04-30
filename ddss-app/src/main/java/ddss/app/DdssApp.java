@@ -1,13 +1,13 @@
-package ssau.kuznetsov.ddsssecurity;
+package ddss.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DdssSecurityApplication {
+public class DdssApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(DdssSecurityApplication.class, args);
+        SpringApplication.run(DdssApp.class, args);
     }
 
 }

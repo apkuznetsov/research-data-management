@@ -9,15 +9,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DeviceUserRepositoryUserDetailsService
-        implements UserDetailsService {
-
-    private final DeviceUserRepository repo;
+public class DeviceUserService implements UserDetailsService {
 
     @Autowired
-    public DeviceUserRepositoryUserDetailsService(DeviceUserRepository repo) {
-        this.repo = repo;
-    }
+    private DeviceUserRepository repo;
 
     @Override
     public UserDetails loadUserByUsername(String username)

@@ -33,6 +33,12 @@ public class DeviceUser implements UserDetails {
     public DeviceUser() {
     }
 
+    public DeviceUser(String username, String passwordEncoded, String about) {
+        this.username = username;
+        this.password = passwordEncoded;
+        this.about = about;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_DEVICE_USER"));

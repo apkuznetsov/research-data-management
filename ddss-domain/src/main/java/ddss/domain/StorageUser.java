@@ -3,22 +3,30 @@ package ddss.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "StorageUser")
 @Getter
 @Setter
 public class StorageUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @Column(name = "id", nullable = false)
+    private int id;
+    @Column(name = "username", nullable = false)
     private String username;
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "about")
     private String about;
+    @Column(name = "ipAddress", nullable = false)
     private String ipAddress;
-    private Integer port;
-    private Long availableMegabytesNumber;
+    @Column(name = "port", nullable = false)
+    private int port;
+    @Column(name = "availableMegabytesNumber", nullable = false)
+    private long availableMegabytesNumber;
+
+    public StorageUser() {
+    }
 }

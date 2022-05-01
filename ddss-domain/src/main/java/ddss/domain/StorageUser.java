@@ -2,8 +2,10 @@ package ddss.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "StorageUser")
@@ -26,6 +28,10 @@ public class StorageUser {
     private int port;
     @Column(name = "availableMegabytesNumber", nullable = false)
     private long availableMegabytesNumber;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "storageUser")
+    @ToString.Exclude
+    private List<CatalogWithStorageRecord> catalogWithStorageRecords;
 
     public StorageUser() {
     }

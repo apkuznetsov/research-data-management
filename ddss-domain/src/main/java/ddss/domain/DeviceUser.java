@@ -32,6 +32,10 @@ public class DeviceUser implements UserDetails {
     @Column(name = "about")
     private String about;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "deviceUser")
+    @ToString.Exclude
+    private List<CatalogRecord> catalogRecords;
+
     public DeviceUser() {
     }
 

@@ -21,8 +21,10 @@ public class CatalogRecord {
     private String protoScheme;
     @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt;
-    @Column(name = "deviceUserId", nullable = false)
-    private Integer deviceUserId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "deviceUserId", nullable = false)
+    private DeviceUser deviceUser;
 
     public CatalogRecord() {
     }

@@ -1,5 +1,6 @@
 package ddss.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +29,7 @@ public class CatalogRecord {
     private DeviceUser deviceUser;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogRecord")
+    @JsonIgnore
     private List<CatalogWithStorageRecord> catalogWithStorageRecords;
 
     public CatalogRecord() {

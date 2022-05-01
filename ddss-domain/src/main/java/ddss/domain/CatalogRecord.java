@@ -28,7 +28,7 @@ public class CatalogRecord {
     private DeviceUser deviceUser;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogRecord")
-    private List<CatalogRecordWithStorage> catalogWithStorageRecords;
+    private List<CatalogWithStorageRecord> catalogWithStorageRecords;
 
     public CatalogRecord() {
     }

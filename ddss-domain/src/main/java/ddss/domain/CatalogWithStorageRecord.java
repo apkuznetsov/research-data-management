@@ -6,10 +6,10 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CatalogRecordWithStorage")
+@Table(name = "CatalogWithStorageRecord")
 @Getter
 @Setter
-public class CatalogRecordWithStorage {
+public class CatalogWithStorageRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -23,6 +23,6 @@ public class CatalogRecordWithStorage {
     @JoinColumn(name = "catalogRecordId", nullable = false)
     private CatalogRecord catalogRecord;
 
-    public CatalogRecordWithStorage() {
+    public CatalogWithStorageRecord() {
     }
 }

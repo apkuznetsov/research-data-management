@@ -16,10 +16,12 @@ public class CatalogRecordWithStorage {
     private Integer id;
     @Column(name = "isAvailable", nullable = false)
     private boolean isAvailable;
-    @Column(name = "catalogRecordId", nullable = false)
-    private int catalogRecordId;
     @Column(name = "storageUserId", nullable = false)
     private int storageUserId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "catalogRecordId", nullable = false)
+    private CatalogRecord catalogRecord;
 
     public CatalogRecordWithStorage() {
     }

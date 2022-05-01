@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "CatalogRecord")
@@ -25,6 +26,9 @@ public class CatalogRecord {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "deviceUserId", nullable = false)
     private DeviceUser deviceUser;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogRecord")
+    private List<CatalogRecordWithStorage> catalogWithStorageRecords;
 
     public CatalogRecord() {
     }

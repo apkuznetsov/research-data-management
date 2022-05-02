@@ -30,6 +30,7 @@
         <module>ddss-domain</module>
         <module>ddss-data</module>
         <module>ddss-security</module>
+        <module>ddss-api</module>
     </modules>
 
 </project>

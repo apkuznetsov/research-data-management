@@ -35,6 +35,12 @@
             <artifactId>ddss-security</artifactId>
             <version>${ddss.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.4</version>
+        </dependency>
     </dependencies>
 
     <build>

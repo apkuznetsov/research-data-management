@@ -41,12 +41,10 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- H2 if this is strictly necessary except for testing -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.1.212</version>
-            <scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.4</version>
         </dependency>
 
         <!-- test dependencies -->

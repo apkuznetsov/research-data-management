@@ -22,6 +22,11 @@
     <dependencies>
         <dependency>
             <groupId>ssau.kuznetsov</groupId>
+            <artifactId>ddss-api</artifactId>
+            <version>${ddss.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ssau.kuznetsov</groupId>
             <artifactId>ddss-data</artifactId>
             <version>${ddss.version}</version>
         </dependency>

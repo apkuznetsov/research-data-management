@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS DeviceUser
+CREATE TABLE IF NOT EXISTS device_user
 (
     id       SERIAL PRIMARY KEY,
     username VARCHAR(64) NOT NULL,
@@ -6,48 +6,48 @@ CREATE TABLE IF NOT EXISTS DeviceUser
     about    VARCHAR(256)
 );
 
-CREATE TABLE IF NOT EXISTS CatalogRecord
+CREATE TABLE IF NOT EXISTS catalog_record
 (
-    id           SERIAL PRIMARY KEY,
-    about        VARCHAR(2048),
-    protoScheme  VARCHAR(2048) NOT NULL,
-    createAt     TIMESTAMP     NOT NULL,
-    deviceUserId BIGINT
+    id             SERIAL PRIMARY KEY,
+    about          VARCHAR(2048),
+    proto_scheme   VARCHAR(2048) NOT NULL,
+    create_at      TIMESTAMP     NOT NULL,
+    device_user_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS StorageUser
+CREATE TABLE IF NOT EXISTS storage_user
 (
-    id                       SERIAL PRIMARY KEY,
-    username                 VARCHAR(64) NOT NULL,
-    password                 VARCHAR(64) NOT NULL,
-    about                    VARCHAR(2048),
-    ipAddress                VARCHAR(15) NOT NULL,
-    port                     SMALLINT,
-    availableMegabytesNumber BIGINT      NOT NULL
+    id                         SERIAL PRIMARY KEY,
+    username                   VARCHAR(64) NOT NULL,
+    password                   VARCHAR(64) NOT NULL,
+    about                      VARCHAR(2048),
+    ip_address                 VARCHAR(15) NOT NULL,
+    port                       SMALLINT,
+    available_megabytes_number BIGINT      NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS CatalogWithStorageRecord
+CREATE TABLE IF NOT EXISTS catalog_with_storage_record
 (
-    id              SERIAL PRIMARY KEY,
-    isAvailable     BOOLEAN NOT NULL,
-    catalogRecordId BIGINT  NOT NULL,
-    storageUserId   BIGINT
+    id                SERIAL PRIMARY KEY,
+    is_available      BOOLEAN NOT NULL,
+    catalog_record_id BIGINT  NOT NULL,
+    storage_user_id   BIGINT
 );
 
-alter table DeviceUser
-    add constraint uniq_DeviceUser_username unique (username);
+alter table device_user
+    add constraint uniq_device_user_username unique (username);
 
-alter table StorageUser
-    add constraint uniq_StorageUser_username unique (username);
+alter table storage_user
+    add constraint uniq_storage_user_username unique (username);
 
-alter table CatalogRecord
-    add constraint fk_CatalogRecord_deviceUserId
-        foreign key (deviceUserId) references DeviceUser;
+alter table catalog_record
+    add constraint fk_catalog_record_device_user_id
+        foreign key (device_user_id) references device_user;
 
-alter table CatalogWithStorageRecord
-    add constraint fk_CatalogWithStorageRecord_catalogRecordId
-        foreign key (catalogRecordId) references CatalogRecord;
+alter table catalog_with_storage_record
+    add constraint fk_catalog_with_storage_record_catalog_record_id
+        foreign key (catalog_record_id) references catalog_record;
 
-alter table CatalogWithStorageRecord
-    add constraint fk_CatalogWithStorageRecord_storageUserId
-        foreign key (storageUserId) references StorageUser;
+alter table catalog_with_storage_record
+    add constraint fk_catalog_with_storage_record_storage_user_id
+        foreign key (storage_user_id) references storage_user;

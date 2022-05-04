@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "DeviceUser")
+@Table(name = "device_user")
 @Getter
 @Setter
 @ToString

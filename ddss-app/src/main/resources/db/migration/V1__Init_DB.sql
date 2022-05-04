@@ -33,3 +33,21 @@ CREATE TABLE IF NOT EXISTS CatalogWithStorageRecord
     catalogRecordId BIGINT  NOT NULL,
     storageUserId   BIGINT
 );
+
+alter table DeviceUser
+    add constraint uniq_DeviceUser_username unique (username);
+
+alter table StorageUser
+    add constraint uniq_StorageUser_username unique (username);
+
+alter table CatalogRecord
+    add constraint fk_CatalogRecord_deviceUserId
+        foreign key (deviceUserId) references DeviceUser;
+
+alter table CatalogWithStorageRecord
+    add constraint fk_CatalogWithStorageRecord_catalogRecordId
+        foreign key (catalogRecordId) references CatalogRecord;
+
+alter table CatalogWithStorageRecord
+    add constraint fk_CatalogWithStorageRecord_storageUserId
+        foreign key (storageUserId) references StorageUser;

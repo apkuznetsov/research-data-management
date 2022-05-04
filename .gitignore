@@ -32,7 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-*/protoc.exe
 */.mvn/wrapper/
-
-.mvn/wrapper/

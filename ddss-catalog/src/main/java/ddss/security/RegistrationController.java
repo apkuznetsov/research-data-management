@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/cat/register")
+@RequestMapping("/cat")
 public class RegistrationController {
 
     private final DeviceUserRepository userRepo;
@@ -22,8 +23,8 @@ public class RegistrationController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping(consumes = "application/json")
-    public ResponseEntity<RegistrationForm> register(RegistrationForm form) {
+    @PostMapping(value = "/register", consumes = "application/json")
+    public ResponseEntity<RegistrationForm> register(@RequestBody RegistrationForm form) {
         DeviceUser foundUser = userRepo.findByUsername(form.getUsername());
         if (foundUser == null) {
             userRepo.save(form.toDeviceUser(passwordEncoder));

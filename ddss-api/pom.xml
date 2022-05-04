@@ -10,21 +10,17 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ddss-app</artifactId>
+    <artifactId>ddss-api</artifactId>
     <packaging>jar</packaging>
-    <name>ddss-app</name>
-    <description>ddss-app</description>
+    <name>ddss-api</name>
+    <description>ddss-api</description>
 
     <properties>
         <java.version>11</java.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>ssau.kuznetsov</groupId>
-            <artifactId>ddss-api</artifactId>
-            <version>${ddss.version}</version>
-        </dependency>
+        <!-- DDSS dependencies -->
         <dependency>
             <groupId>ssau.kuznetsov</groupId>
             <artifactId>ddss-data</artifactId>
@@ -41,20 +37,29 @@
             <version>${ddss.version}</version>
         </dependency>
 
+        <!-- necessary Boot starters -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.3.4</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

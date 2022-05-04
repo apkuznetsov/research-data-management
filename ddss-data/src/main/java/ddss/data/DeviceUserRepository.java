@@ -1,9 +1,9 @@
 package ddss.data;
 
 import ddss.domain.DeviceUser;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DeviceUserRepository extends CrudRepository<DeviceUser, Long> {
+public interface DeviceUserRepository extends JpaRepository<DeviceUser, Integer> {
 
     DeviceUser findByUsername(String username);
 

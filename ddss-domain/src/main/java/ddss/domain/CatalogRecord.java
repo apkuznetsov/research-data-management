@@ -1,5 +1,6 @@
 package ddss.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "CatalogRecord")
+@Table(name = "catalog_record")
 @Getter
 @Setter
 public class CatalogRecord {
@@ -18,16 +19,17 @@ public class CatalogRecord {
     private Integer id;
     @Column(name = "about")
     private String about;
-    @Column(name = "protoScheme", nullable = false)
+    @Column(name = "proto_scheme", nullable = false)
     private String protoScheme;
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "deviceUserId", nullable = false)
+    @JoinColumn(name = "device_user_id", nullable = false)
     private DeviceUser deviceUser;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogRecord")
+    @JsonIgnore
     private List<CatalogWithStorageRecord> catalogWithStorageRecords;
 
     public CatalogRecord() {

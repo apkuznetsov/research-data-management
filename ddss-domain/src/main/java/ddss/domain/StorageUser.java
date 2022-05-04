@@ -1,5 +1,6 @@
 package ddss.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "StorageUser")
+@Table(name = "storage_user")
 @Getter
 @Setter
 public class StorageUser {
@@ -22,15 +23,16 @@ public class StorageUser {
     private String password;
     @Column(name = "about")
     private String about;
-    @Column(name = "ipAddress", nullable = false)
+    @Column(name = "ip_address", nullable = false)
     private String ipAddress;
     @Column(name = "port", nullable = false)
     private int port;
-    @Column(name = "availableMegabytesNumber", nullable = false)
+    @Column(name = "available_megabytes_number", nullable = false)
     private long availableMegabytesNumber;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "storageUser")
     @ToString.Exclude
+    @JsonIgnore
     private List<CatalogWithStorageRecord> catalogWithStorageRecords;
 
     public StorageUser() {

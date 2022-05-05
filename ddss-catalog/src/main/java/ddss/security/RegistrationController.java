@@ -4,7 +4,7 @@ import ddss.data.DeviceUserRepository;
 import ddss.domain.DeviceUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
 
     private final DeviceUserRepository userRepo;
-    private final PasswordEncoder passwordEncoder;
+    private DeviceUserRepository userRepo;
 
-    public RegistrationController(
-            DeviceUserRepository userRepo, PasswordEncoder passwordEncoder) {
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
@@ -27,7 +27,7 @@ public class RegistrationController {
     public ResponseEntity<RegistrationForm> register(@RequestBody RegistrationForm form) {
         DeviceUser foundUser = userRepo.findByUsername(form.getUsername());
         if (foundUser == null) {
-            userRepo.save(form.toDeviceUser(passwordEncoder));
+            userRepo.save(form.toDeviceUser(bCryptPasswordEncoder));
             return new ResponseEntity<>(form, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(form, HttpStatus.BAD_REQUEST);

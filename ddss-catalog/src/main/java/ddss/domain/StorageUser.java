@@ -26,7 +26,7 @@ public class StorageUser {
     @Column(name = "ip_address", nullable = false)
     private String ipAddress;
     @Column(name = "port", nullable = false)
-    private int port;
+    private short port;
     @Column(name = "available_megabytes_number", nullable = false)
     private long availableMegabytesNumber;
 

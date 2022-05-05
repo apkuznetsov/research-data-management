@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS catalog_record
     about          VARCHAR(2048),
     proto_scheme   VARCHAR(2048) NOT NULL,
     created_at     TIMESTAMP     NOT NULL,
-    device_user_id BIGINT
+    device_user_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS storage_user
@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS catalog_with_storage_record
 (
     id                SERIAL PRIMARY KEY,
     is_available      BOOLEAN NOT NULL,
-    catalog_record_id BIGINT  NOT NULL,
-    storage_user_id   BIGINT
+    catalog_record_id INTEGER NOT NULL,
+    storage_user_id   INTEGER
 );
 
 alter table device_user

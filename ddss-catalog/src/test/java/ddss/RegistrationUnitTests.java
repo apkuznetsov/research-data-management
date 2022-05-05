@@ -20,7 +20,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(RegistrationController.class)
 public class RegistrationUnitTests {
-    
+
+    private static final String CAT_REGISTER = "/cat/register";
+
+    private static final DeviceUser u = new DeviceUser("kuznetsov", "qwerty", "test device");
+
     @MockBean
     private DeviceUserRepository userRepo;
 
@@ -45,10 +49,9 @@ public class RegistrationUnitTests {
 
     @Test
     public void post_register_with_status_created() throws Exception {
-        DeviceUser u = new DeviceUser("kuznetsov", "qwerty", "test device");
         Mockito.when(userRepo.findByUsername(u.getUsername())).thenReturn(null);
 
-        mockMvc.perform(post("/cat/register")
+        mockMvc.perform(post(CAT_REGISTER)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(u))
                         .accept(MediaType.APPLICATION_JSON))
@@ -57,10 +60,9 @@ public class RegistrationUnitTests {
 
     @Test
     public void post_register_with_status_bad_request() throws Exception {
-        DeviceUser u = new DeviceUser("kuznetsov", "qwerty", "test device");
         Mockito.when(userRepo.findByUsername(u.getUsername())).thenReturn(u);
 
-        mockMvc.perform(post("/cat/register")
+        mockMvc.perform(post(CAT_REGISTER)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(u))
                         .accept(MediaType.APPLICATION_JSON))

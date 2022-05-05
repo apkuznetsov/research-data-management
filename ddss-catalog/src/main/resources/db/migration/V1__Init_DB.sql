@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS catalog_record
     id             SERIAL PRIMARY KEY,
     about          VARCHAR(2048),
     proto_scheme   VARCHAR(2048) NOT NULL,
-    create_at      TIMESTAMP     NOT NULL,
+    created_at     TIMESTAMP     NOT NULL,
     device_user_id BIGINT
 );
 

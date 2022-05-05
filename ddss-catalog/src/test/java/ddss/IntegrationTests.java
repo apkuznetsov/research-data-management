@@ -13,21 +13,21 @@ import org.testcontainers.containers.PostgreSQLContainer;
 
 @SpringBootTest(classes = DdssCatalogApp.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("it")
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, FlywayTestExecutionListener.class })
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, FlywayTestExecutionListener.class})
 public abstract class IntegrationTests {
-
-    @Autowired
-    public TestRestTemplate restTemplate;
 
     private static final PostgreSQLContainer POSTGRES_CONTAINER;
 
     static {
-        POSTGRES_CONTAINER = (PostgreSQLContainer)(new PostgreSQLContainer("postgres:14.2")
+        POSTGRES_CONTAINER = (PostgreSQLContainer) (new PostgreSQLContainer("postgres:14.2")
                 .withUsername("testcontainersroot")
                 .withPassword("testcontainersqwerty")
                 .withReuse(true));
         POSTGRES_CONTAINER.start();
     }
+
+    @Autowired
+    public TestRestTemplate restTemplate;
 
     @DynamicPropertySource
     public static void setDatasourceProperties(final DynamicPropertyRegistry registry) {

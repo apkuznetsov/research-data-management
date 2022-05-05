@@ -22,7 +22,7 @@ public abstract class IntegrationTests {
     private static final PostgreSQLContainer POSTGRES_CONTAINER;
 
     static {
-        POSTGRES_CONTAINER = (PostgreSQLContainer)(new PostgreSQLContainer("postgres:10.18")
+        POSTGRES_CONTAINER = (PostgreSQLContainer)(new PostgreSQLContainer("postgres:14.2")
                 .withUsername("testcontainersroot")
                 .withPassword("testcontainersqwerty")
                 .withReuse(true));

@@ -26,6 +26,7 @@ public class CatalogRecord {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "device_user_id", nullable = false)
+    @JsonIgnore
     private DeviceUser deviceUser;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogRecord")

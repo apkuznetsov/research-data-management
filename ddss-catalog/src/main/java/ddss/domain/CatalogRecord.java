@@ -1,6 +1,7 @@
 package ddss.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +27,7 @@ public class CatalogRecord {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "device_user_id", nullable = false)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private DeviceUser deviceUser;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogRecord")
@@ -34,5 +35,9 @@ public class CatalogRecord {
     private List<CatalogWithStorageRecord> catalogWithStorageRecords;
 
     public CatalogRecord() {
+    }
+
+    public void setUser(DeviceUser deviceUser) {
+        this.deviceUser = deviceUser;
     }
 }

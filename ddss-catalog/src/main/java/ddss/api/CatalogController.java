@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/cat")
@@ -18,6 +18,15 @@ public class CatalogController {
 
     @Autowired
     private CatalogRecordRepository catalogRepo;
+
+    @PostMapping(value = "/record/create", consumes = "application/json")
+    public ResponseEntity<CatalogRecord> createQuiz(
+            @Valid @RequestBody CatalogRecord record, @AuthenticationPrincipal DeviceUser user) {
+
+        record.setUser(user);
+        catalogRepo.save(record);
+        return new ResponseEntity<>(record, HttpStatus.CREATED);
+    }
 
     @GetMapping(path = "/record/{id}")
     public ResponseEntity<CatalogRecord> getRecordById(@PathVariable int id, @AuthenticationPrincipal DeviceUser user) {

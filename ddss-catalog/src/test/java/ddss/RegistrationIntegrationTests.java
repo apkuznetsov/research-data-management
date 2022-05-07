@@ -16,12 +16,14 @@ public class RegistrationIntegrationTests extends IntegrationTests {
 
     private static final String CAT_REGISTER = "/cat/register";
 
+    private static final RegistrationForm registrationForm =
+            new RegistrationForm("kuznetsov2", "qwerty2", "test device 2");
+
     @Test
     @FlywayTest
     public void post_register_with_status_created() throws IOException {
         // arrange
-        RegistrationForm entity = new RegistrationForm("kuznetsov", "qwerty", "test device 1");
-        HttpEntity<RegistrationForm> request = new HttpEntity<>(entity);
+        HttpEntity<RegistrationForm> request = new HttpEntity<>(registrationForm);
 
         // act
         ResponseEntity<RegistrationForm> response = restTemplate.exchange(

@@ -40,6 +40,21 @@ public class CatalogIntegrationTests extends IntegrationTests {
 
     @Test
     @FlywayTest
+    public void get_record_by_id_with_status_not_found() {
+        // arrange
+        String testUrl = CAT_RECORD + "/" + TEST_RECORD_ID_FOR_NOT_FOUND;
+        HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
+
+        // act
+        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth(TEST_USERNAME, TEST_PASSWORD)
+                .exchange(testUrl, HttpMethod.GET, request, CatalogRecord.class);
+
+        // assert
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    @FlywayTest
     public void delete_record_with_status_no_content() {
         // arrange
         String testUrl = CAT_RECORD + "/" + TEST_RECORD_ID;

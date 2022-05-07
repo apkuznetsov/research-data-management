@@ -37,6 +37,28 @@ public class CatalogRecord {
     public CatalogRecord() {
     }
 
+    public CatalogRecord(String about, String protoScheme, String createdAt) {
+        this.about = about;
+        this.protoScheme = protoScheme;
+        this.createdAt = LocalDateTime.parse(createdAt);
+    }
+
+    public CatalogRecord(int id, String about, String protoScheme, String createdAt) {
+        this(about, protoScheme, createdAt);
+        this.id = id;
+    }
+
+    public CatalogRecord(String about, String protoScheme, LocalDateTime createdAt) {
+        this.about = about;
+        this.protoScheme = protoScheme;
+        this.createdAt = createdAt;
+    }
+
+    public CatalogRecord(int id, String about, String protoScheme, LocalDateTime createdAt) {
+        this(about, protoScheme, createdAt);
+        this.id = id;
+    }
+
     public void setUser(DeviceUser deviceUser) {
         this.deviceUser = deviceUser;
     }

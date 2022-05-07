@@ -20,7 +20,7 @@ public class CatalogController {
     private CatalogRecordRepository catalogRepo;
 
     @PostMapping(value = "/record/create", consumes = "application/json")
-    public ResponseEntity<CatalogRecord> createQuiz(
+    public ResponseEntity<CatalogRecord> createCreate(
             @Valid @RequestBody CatalogRecord record, @AuthenticationPrincipal DeviceUser user) {
 
         record.setUser(user);

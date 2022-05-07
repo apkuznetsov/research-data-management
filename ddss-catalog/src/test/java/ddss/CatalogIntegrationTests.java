@@ -13,6 +13,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
     private static final String TEST_USERNAME = "kuznetsov";
     private static final String TEST_PASSWORD = "qwerty";
     private static final int TEST_RECORD_1_ID = 11;
+    private static final int TEST_RECORD_2_ID = 12;
 
     @Test
     @FlywayTest
@@ -44,5 +45,21 @@ public class CatalogIntegrationTests extends IntegrationTests {
 
         // assert
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    @FlywayTest
+    public void delete_quiz_with_status_forbidden() {
+        // arrange
+        String testUrl = CAT_RECORD + "/" + TEST_RECORD_2_ID;
+        HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
+
+        // act
+        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth(TEST_USERNAME, TEST_PASSWORD)
+                .exchange(testUrl, HttpMethod.DELETE, request, CatalogRecord.class);
+        CatalogRecord result = response.getBody();
+
+        // assert
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }
 }

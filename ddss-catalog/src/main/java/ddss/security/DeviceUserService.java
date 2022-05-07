@@ -17,15 +17,14 @@ public class DeviceUserService implements UserDetailsService {
     private DeviceUserRepository repo;
 
     @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         DeviceUser user = repo.findByUsername(username);
-        if (user != null) {
-            return user;
+        if (user == null) {
+            throw new UsernameNotFoundException(
+                    "device user '" + username + "' not found");
         }
 
-        throw new UsernameNotFoundException(
-                "device user '" + username + "' not found");
+        return user;
     }
 }

@@ -29,11 +29,33 @@ public class CatalogController {
     }
 
     @GetMapping(path = "/record/{id}")
-    public ResponseEntity<CatalogRecord> getRecordById(@PathVariable int id, @AuthenticationPrincipal DeviceUser user) {
-        CatalogRecord record = catalogRepo.findById(id).orElse(null);
+    public ResponseEntity<CatalogRecord> getRecordById(
+            @PathVariable int id, @AuthenticationPrincipal DeviceUser user) {
 
+        CatalogRecord record = catalogRepo.findById(id).orElse(null);
         return record == null
                 ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
                 : new ResponseEntity<>(record, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/record/{id}")
+    public ResponseEntity deleteRecordById(
+            @PathVariable int id, @AuthenticationPrincipal DeviceUser user) {
+
+        ResponseEntity response;
+
+        CatalogRecord record = catalogRepo.findById(id).orElse(null);
+        if (record != null) {
+            if (record.getDeviceUser().getUsername().equals(user.getUsername())) {
+                catalogRepo.deleteById(id);
+                response = new ResponseEntity(HttpStatus.NO_CONTENT);
+            } else {
+                response = new ResponseEntity(HttpStatus.FORBIDDEN);
+            }
+        } else {
+            response = new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        return response;
     }
 }

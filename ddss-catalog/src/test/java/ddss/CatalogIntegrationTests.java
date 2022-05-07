@@ -18,7 +18,6 @@ public class CatalogIntegrationTests extends IntegrationTests {
     public void get_record_by_id() throws IOException {
         // arrange
         String testUrl = CAT_RECORD + "/" + 11;
-
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
@@ -28,5 +27,21 @@ public class CatalogIntegrationTests extends IntegrationTests {
 
         // assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    @FlywayTest
+    public void delete_record_with_status_no_content() throws Exception {
+        // arrange
+        String testUrl = CAT_RECORD + "/" + 11;
+        HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
+
+        // act
+        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth("kuznetsov", "qwerty")
+                .exchange(testUrl, HttpMethod.DELETE, request, CatalogRecord.class);
+        CatalogRecord result = response.getBody();
+
+        // assert
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 }

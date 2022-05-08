@@ -6,5 +6,13 @@ CREATE TABLE IF NOT EXISTS device_user
     about    VARCHAR(256)
 );
 
+CREATE TABLE IF NOT EXISTS deposit
+(
+    id                BIGSERIAL PRIMARY KEY,
+    catalog_record_id BIGINT    NOT NULL,
+    data              bytea     NOT NULL,
+    saved_at          TIMESTAMP NOT NULL
+);
+
 alter table device_user
     add constraint uniq_device_user_username unique (username);

@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+message SensorData {
+  int32 degrees_celsius = 1;
+}

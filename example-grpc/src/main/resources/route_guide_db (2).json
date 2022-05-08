@@ -1,0 +1,8 @@
+{
+    "firstName": "Пётр",
+    "lastName": "Михайлов",
+    "address": {
+        "streetAddress": "Московское ш., д. 34",
+        "city": "Самара"
+    }
+}

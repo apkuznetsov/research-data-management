@@ -1,6 +1,6 @@
-package ddss.api;
+package ddss.storage.api;
 
-import ddss.domain.DeviceUser;
+import ddss.storage.domain.DeviceUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/storage")
-public class DownloadController {
+public class UploadController {
 
-    @PostMapping(value = "/download", consumes = "application/json")
-    public ResponseEntity<String> download(@AuthenticationPrincipal DeviceUser user) {
-        return new ResponseEntity<>("data downloaded", HttpStatus.OK);
+    @PostMapping(value = "/upload", consumes = "application/json")
+    public ResponseEntity<String> upload(@AuthenticationPrincipal DeviceUser user) {
+        return new ResponseEntity<>("data uploaded", HttpStatus.OK);
     }
 }

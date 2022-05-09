@@ -1,4 +1,4 @@
-package ddss.security;
+package ddss.storage.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

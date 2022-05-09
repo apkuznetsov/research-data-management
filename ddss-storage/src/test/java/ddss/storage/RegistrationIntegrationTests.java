@@ -1,6 +1,6 @@
-package ddss;
+package ddss.storage;
 
-import ddss.security.RegistrationForm;
+import ddss.storage.security.RegistrationForm;
 import org.flywaydb.test.annotation.FlywayTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;

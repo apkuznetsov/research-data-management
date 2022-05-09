@@ -1,4 +1,4 @@
-package ddss;
+package ddss.storage;
 
 import org.flywaydb.test.FlywayTestExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;

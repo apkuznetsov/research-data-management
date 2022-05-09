@@ -1,7 +1,7 @@
-package ddss.security;
+package ddss.storage.security;
 
-import ddss.data.DeviceUserRepository;
-import ddss.domain.DeviceUser;
+import ddss.storage.data.DeviceUserRepository;
+import ddss.storage.domain.DeviceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

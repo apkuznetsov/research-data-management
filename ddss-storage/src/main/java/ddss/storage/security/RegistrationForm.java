@@ -1,6 +1,6 @@
-package ddss.security;
+package ddss.storage.security;
 
-import ddss.domain.DeviceUser;
+import ddss.storage.domain.DeviceUser;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

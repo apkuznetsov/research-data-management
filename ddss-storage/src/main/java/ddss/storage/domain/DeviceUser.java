@@ -1,4 +1,4 @@
-package ddss.domain;
+package ddss.storage.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;

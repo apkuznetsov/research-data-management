@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS device_user
 CREATE TABLE IF NOT EXISTS deposit
 (
     id                BIGSERIAL PRIMARY KEY,
-    catalog_record_id BIGINT    NOT NULL,
+    catalog_record_id INTEGER   NOT NULL,
     data              bytea     NOT NULL,
     saved_at          TIMESTAMP NOT NULL
 );

@@ -28,4 +28,10 @@ public class Deposit {
 
     public Deposit() {
     }
+
+    public Deposit(int catalogRecordId, LocalDateTime savedAt, byte[] data) {
+        this.catalogRecordId = catalogRecordId;
+        this.savedAt = savedAt;
+        this.data = data;
+    }
 }

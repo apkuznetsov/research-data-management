@@ -18,7 +18,8 @@ public class UploadController {
     @PostMapping(value = "/upload", consumes = "application/json")
     public ResponseEntity<Feedback> upload(@RequestBody Data data, @AuthenticationPrincipal DeviceUser user) {
         Feedback feedback = new Feedback(
-                "bytes " + data.getBytes() + " with " + data.getBytes().length() + " length uploaded");
+                "bytes " + data.getBytes() + " with " + data.getBytes().length() + " length uploaded",
+                data.getBytes());
         return new ResponseEntity<>(feedback, HttpStatus.OK);
     }
 }

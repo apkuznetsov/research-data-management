@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ddss.device.proto";
+option java_outer_classname = "SensorsDataProto";
+
+message SensorsData {
+  int32 degrees_celsius = 1;
+  int32 pascals = 2;
+  int32 meters_per_second = 3;
+}

@@ -21,6 +21,7 @@ public class DdssDeviceApp {
 
     public static void main(String[] args) throws InvalidProtocolBufferException {
         String uploadAddress = "http://localhost:8081/storage/upload";
+        String downloadAddress = "http://localhost:8081/storage/download";
 
         SensorsData sensorsData = SensorsData.newBuilder()
                 .setDegreesCelsius(20)
@@ -53,5 +54,14 @@ public class DdssDeviceApp {
         System.out.println("pascals ............. " + parsedSensorsData1.getPascals());
         System.out.println("meters per second ... " + parsedSensorsData1.getMetersPerSecond());
         System.out.println();
+
+        ResponseEntity<Data> response2 = restTemplate
+                .exchange(downloadAddress, HttpMethod.GET, request, Data.class);
+
+        Data result2 = response2.getBody();
+        SensorsData parsedSensorsData2 = SensorsData.parseFrom(result2.getBytes().getBytes());
+        System.out.println("degrees ............. " + parsedSensorsData2.getDegreesCelsius());
+        System.out.println("pascals ............. " + parsedSensorsData2.getPascals());
+        System.out.println("meters per second ... " + parsedSensorsData2.getMetersPerSecond());
     }
 }

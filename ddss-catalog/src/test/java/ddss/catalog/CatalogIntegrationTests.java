@@ -1,6 +1,6 @@
-package ddss;
+package ddss.catalog;
 
-import ddss.domain.CatalogRecord;
+import ddss.catalog.domain.CatalogRecord;
 import org.flywaydb.test.annotation.FlywayTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.*;

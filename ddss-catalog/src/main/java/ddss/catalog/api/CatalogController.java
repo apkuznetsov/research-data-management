@@ -1,8 +1,8 @@
-package ddss.api;
+package ddss.catalog.api;
 
-import ddss.data.CatalogRecordRepository;
-import ddss.domain.CatalogRecord;
-import ddss.domain.DeviceUser;
+import ddss.catalog.data.CatalogRecordRepository;
+import ddss.catalog.domain.CatalogRecord;
+import ddss.catalog.domain.DeviceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

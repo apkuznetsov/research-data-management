@@ -1,4 +1,4 @@
-package ddss;
+package ddss.catalog;
 
 import org.flywaydb.test.FlywayTestExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;

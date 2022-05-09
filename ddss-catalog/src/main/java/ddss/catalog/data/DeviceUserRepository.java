@@ -1,6 +1,6 @@
-package ddss.data;
+package ddss.catalog.data;
 
-import ddss.domain.DeviceUser;
+import ddss.catalog.domain.DeviceUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

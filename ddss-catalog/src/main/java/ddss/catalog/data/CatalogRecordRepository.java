@@ -1,6 +1,6 @@
-package ddss.data;
+package ddss.catalog.data;
 
-import ddss.domain.CatalogRecord;
+import ddss.catalog.domain.CatalogRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

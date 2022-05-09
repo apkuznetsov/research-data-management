@@ -1,4 +1,4 @@
-package ddss.domain;
+package ddss.catalog.domain;
 
 import lombok.Getter;
 import lombok.Setter;

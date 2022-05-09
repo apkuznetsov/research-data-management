@@ -1,4 +1,4 @@
-package ddss.domain;
+package ddss.catalog.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

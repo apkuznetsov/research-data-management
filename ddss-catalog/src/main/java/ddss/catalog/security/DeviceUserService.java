@@ -1,7 +1,7 @@
-package ddss.security;
+package ddss.catalog.security;
 
-import ddss.data.DeviceUserRepository;
-import ddss.domain.DeviceUser;
+import ddss.catalog.data.DeviceUserRepository;
+import ddss.catalog.domain.DeviceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

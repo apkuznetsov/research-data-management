@@ -35,3 +35,4 @@ build/
 */.mvn/wrapper/
 
 ddss-device/src/main/protoc.exe
+ddss-storage/src/test/protoc.exe

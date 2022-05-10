@@ -20,7 +20,8 @@ import java.util.Objects;
 public class DdssDeviceApp {
 
     public static void main(String[] args) throws InvalidProtocolBufferException {
-        String address = "http://localhost:8081/storage/upload";
+        String uploadAddress = "http://localhost:8081/storage/upload";
+        String downloadAddress = "http://localhost:8081/storage/download";
 
         SensorsData sensorsData = SensorsData.newBuilder()
                 .setDegreesCelsius(20)
@@ -39,18 +40,28 @@ public class DdssDeviceApp {
         restTemplate.setMessageConverters(messageConverters);
         HttpEntity<Data> request = new HttpEntity<>(dataToSend);
 
-        ResponseEntity<Feedback> response = restTemplate
-                .exchange(address, HttpMethod.POST, request, Feedback.class);
+        ResponseEntity<Feedback> response1 = restTemplate
+                .exchange(uploadAddress, HttpMethod.POST, request, Feedback.class);
 
-        String result = Objects.requireNonNull(response.getBody())
+        String result1 = Objects.requireNonNull(response1.getBody())
                 .getBytes();
-        System.out.println(result);
+        System.out.println(result1);
         System.out.println("bytes " + dataToSend.getBytes() + " with " + dataToSend.getBytes().length() + " length uploaded");
         System.out.println();
 
-        SensorsData parsedSensorsData = SensorsData.parseFrom(result.getBytes());
-        System.out.println("degrees ............. " + parsedSensorsData.getDegreesCelsius());
-        System.out.println("pascals ............. " + parsedSensorsData.getPascals());
-        System.out.println("meters per second ... " + parsedSensorsData.getMetersPerSecond());
+        SensorsData parsedSensorsData1 = SensorsData.parseFrom(result1.getBytes());
+        System.out.println("degrees ............. " + parsedSensorsData1.getDegreesCelsius());
+        System.out.println("pascals ............. " + parsedSensorsData1.getPascals());
+        System.out.println("meters per second ... " + parsedSensorsData1.getMetersPerSecond());
+        System.out.println();
+
+        ResponseEntity<Data> response2 = restTemplate
+                .exchange(downloadAddress, HttpMethod.GET, request, Data.class);
+
+        Data result2 = response2.getBody();
+        SensorsData parsedSensorsData2 = SensorsData.parseFrom(result2.getBytes().getBytes());
+        System.out.println("degrees ............. " + parsedSensorsData2.getDegreesCelsius());
+        System.out.println("pascals ............. " + parsedSensorsData2.getPascals());
+        System.out.println("meters per second ... " + parsedSensorsData2.getMetersPerSecond());
     }
 }

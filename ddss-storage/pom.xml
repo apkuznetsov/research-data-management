@@ -91,6 +91,18 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.20.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.protobuf-java-format</groupId>
+            <artifactId>protobuf-java-format</artifactId>
+            <version>1.4</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

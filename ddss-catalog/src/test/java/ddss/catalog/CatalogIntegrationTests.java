@@ -12,9 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CatalogIntegrationTests extends IntegrationTests {
 
-    private static final int TEST_RECORD_FOR_CREATE_ID = 13;
-    private static final String TEST_RECORD_FOR_CREATE_ABOUT = "test catalog record for create";
-    private static final String TEST_RECORD_FOR_CREATE_PROTO_SCHEME = "message SensorData { int32 data = 1; }";
     private static final int TEST_RECORD_ID_FOR_FORBIDDEN = 12;
     private static final int TEST_RECORD_ID_FOR_NOT_FOUND = 13;
     @Autowired
@@ -26,7 +23,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
         // arrange
         String testUrl = tprops.getUrlRecord() + tprops.getUrlCreate();
         CatalogRecord record = new CatalogRecord(
-                TEST_RECORD_FOR_CREATE_ID, TEST_RECORD_FOR_CREATE_ABOUT, TEST_RECORD_FOR_CREATE_PROTO_SCHEME,
+                tprops.getRecIdForCreate(), tprops.getRecAboutForCreate(), tprops.getRecProtoSchemeForCreate(),
                 LocalDateTime.now());
         HttpEntity<CatalogRecord> request = new HttpEntity<>(record, new HttpHeaders());
 
@@ -38,9 +35,9 @@ public class CatalogIntegrationTests extends IntegrationTests {
 
         // assert
         assert result != null;
-        assertEquals(TEST_RECORD_FOR_CREATE_ID, result.getId());
-        assertEquals(TEST_RECORD_FOR_CREATE_ABOUT, result.getAbout());
-        assertEquals(TEST_RECORD_FOR_CREATE_PROTO_SCHEME, result.getProtoScheme());
+        assertEquals(tprops.getRecIdForCreate(), result.getId());
+        assertEquals(tprops.getRecAboutForCreate(), result.getAbout());
+        assertEquals(tprops.getRecProtoSchemeForCreate(), result.getProtoScheme());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 

@@ -47,6 +47,13 @@ public class DdssCatalogTestProps {
     @Value("${record.proto_scheme}")
     private String recProtoScheme;
 
+    @Value("${record.id.for_create}")
+    private int recIdForCreate;
+    @Value("${record.about.for_create}")
+    private String recAboutForCreate;
+    @Value("${record.proto_scheme.for_create}")
+    private String recProtoSchemeForCreate;
+
     @Value("${cat_rec_id.upload_sensors_data}")
     private int catRecIdUploadSensorsData;
     @Value("${cat_rec_id.upload_person}")

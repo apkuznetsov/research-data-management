@@ -34,4 +34,13 @@ public class DdssStorageTestProps {
     private String urlUpload;
     @Value("${url.storage.download}")
     private String urlDownload;
+
+    @Value("${cat_rec_id.upload_sensors_data}")
+    private int catRecIdUploadSensorsData;
+    @Value("${cat_rec_id.upload_person}")
+    private int catRecIdUploadPerson;
+    @Value("${cat_rec_id.download_ok}")
+    private int catRecIdDownloadOk;
+    @Value("${cat_rec_id.download_not_found}")
+    private int catRecIdDownloadNotFound;
 }

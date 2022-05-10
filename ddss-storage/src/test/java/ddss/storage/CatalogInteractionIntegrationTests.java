@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CatalogInteractionIntegrationTests extends IntegrationTests {
 
-    private static final String STORAGE_AVAILABLE_MEGABYTES = "/storage/admin/available-megabytes";
     @Autowired
     public TestRestTemplate restTemplate;
     @Autowired
@@ -31,7 +30,7 @@ public class CatalogInteractionIntegrationTests extends IntegrationTests {
         // act
         ResponseEntity<AvailableMegabytesNumber> response = restTemplate
                 .withBasicAuth(props.getAdminUsername(), props.getAdminPassword())
-                .exchange(STORAGE_AVAILABLE_MEGABYTES, HttpMethod.GET, request, AvailableMegabytesNumber.class);
+                .exchange(tprops.getUrlAvailableMegabytes(), HttpMethod.GET, request, AvailableMegabytesNumber.class);
         long result = Objects.requireNonNull(
                 response.getBody()).getValue();
 
@@ -49,7 +48,7 @@ public class CatalogInteractionIntegrationTests extends IntegrationTests {
         // act
         ResponseEntity<AvailableMegabytesNumber> response = restTemplate
                 .withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(STORAGE_AVAILABLE_MEGABYTES, HttpMethod.GET, request, AvailableMegabytesNumber.class);
+                .exchange(tprops.getUrlAvailableMegabytes(), HttpMethod.GET, request, AvailableMegabytesNumber.class);
 
         // assert
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());

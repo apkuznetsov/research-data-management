@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegistrationIntegrationTests extends IntegrationTests {
 
-    private static final String STORAGE_REGISTER = "/storage/register";
     @Autowired
     DdssStorageTestProps tprops;
     private RegistrationForm regFormAlreadyCreatedUser;
@@ -36,7 +35,7 @@ public class RegistrationIntegrationTests extends IntegrationTests {
 
         // act
         ResponseEntity<RegistrationForm> response = restTemplate.exchange(
-                STORAGE_REGISTER, HttpMethod.POST, request, RegistrationForm.class);
+                tprops.getUrlRegister(), HttpMethod.POST, request, RegistrationForm.class);
 
         // assert
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -50,7 +49,7 @@ public class RegistrationIntegrationTests extends IntegrationTests {
 
         // act
         ResponseEntity<RegistrationForm> response = restTemplate.exchange(
-                STORAGE_REGISTER, HttpMethod.POST, request, RegistrationForm.class);
+                tprops.getUrlRegister(), HttpMethod.POST, request, RegistrationForm.class);
 
         // assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());

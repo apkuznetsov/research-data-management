@@ -28,6 +28,8 @@ public class DdssCatalogTestProps {
 
     @Value("${url.catalog.record}")
     private String urlRecord;
+    @Value("${url.catalog.create}")
+    private String urlCreate;
 
     @Value("${url.storage.register}")
     private String urlRegister;

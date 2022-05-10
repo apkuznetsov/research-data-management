@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CatalogIntegrationTests extends IntegrationTests {
 
-    private static final String CREATE = "create";
     private static final String TEST_USERNAME = "kuznetsov";
     private static final String TEST_PASSWORD = "qwerty";
     private static final int TEST_RECORD_ID = 11;
@@ -30,7 +29,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
     @FlywayTest
     public void create_record_by_id_with_status_created() {
         // arrange
-        String testUrl = tprops.getUrlRecord() + "/" + CREATE;
+        String testUrl = tprops.getUrlRecord() + tprops.getUrlCreate();
         CatalogRecord record = new CatalogRecord(
                 TEST_RECORD_FOR_CREATE_ID, TEST_RECORD_FOR_CREATE_ABOUT, TEST_RECORD_FOR_CREATE_PROTO_SCHEME,
                 LocalDateTime.now());

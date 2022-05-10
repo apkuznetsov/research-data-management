@@ -50,4 +50,13 @@ public class DdssStorageTestProps {
     private int sensDataPascals;
     @Value("${sensors_data.meters_per_second}")
     private int sensDataMetersPerSecond;
+
+    @Value("${person.id}")
+    private int personId;
+    @Value("${person.name}")
+    private String personName;
+    @Value("${person.surname}")
+    private String personSurname;
+    @Value("${person.email}")
+    private String personEmail;
 }

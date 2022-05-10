@@ -28,7 +28,7 @@ public class DdssStorageTestProps {
 
     @Value("${url.storage.register}")
     private String urlRegister;
-    @Value("${url.storage.available-megabytes}")
+    @Value("${url.storage.available_megabytes}")
     private String urlAvailableMegabytes;
     @Value("${url.storage.upload}")
     private String urlUpload;

@@ -20,17 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageIntegrationTests extends IntegrationTests {
 
-    private static final Person PERSON_PROTO = Person.newBuilder()
-            .setId(1)
-            .setName("Andrey")
-            .setSurname("Kuznetsov")
-            .setEmail("example@example").build();
-    private static final byte[] PERSON_BYTES = PERSON_PROTO.toByteArray();
-    private static final Data PERSON_TO_SEND = new Data(PERSON_BYTES);
-    private SensorsData sensDataProto;
-    private Data dataSensData;
     @Autowired
     private DdssStorageTestProps tprops;
+
+    private SensorsData sensDataProto;
+    private Data dataSensData;
+    private Person protoPerson;
+    private Data dataPerson;
 
     @BeforeEach
     public void init() {
@@ -38,8 +34,15 @@ public class StorageIntegrationTests extends IntegrationTests {
                 .setDegreesCelsius(tprops.getSensDataDegrees())
                 .setPascals(tprops.getSensDataPascals())
                 .setMetersPerSecond(tprops.getSensDataMetersPerSecond()).build();
+        protoPerson = Person.newBuilder()
+                .setId(tprops.getPersonId())
+                .setName(tprops.getPersonName())
+                .setSurname(tprops.getPersonSurname())
+                .setEmail(tprops.getPersonEmail()).build();
         dataSensData = new Data(
                 sensDataProto.toByteArray());
+        dataPerson = new Data(
+                protoPerson.toByteArray());
     }
 
     @Test
@@ -110,7 +113,7 @@ public class StorageIntegrationTests extends IntegrationTests {
     public void upload_two_diff_classes_objs_and_download_them() throws InvalidProtocolBufferException {
         // arrange
         HttpEntity<Data> requestSensorsData = new HttpEntity<>(dataSensData);
-        HttpEntity<Data> requestPerson = new HttpEntity<>(PERSON_TO_SEND);
+        HttpEntity<Data> requestPerson = new HttpEntity<>(dataPerson);
 
         // act
         restTemplate.withBasicAuth(tprops.getUsername(), tprops.getPassword())
@@ -143,10 +146,10 @@ public class StorageIntegrationTests extends IntegrationTests {
         assertEquals(parsedSensorsData.getMetersPerSecond(), sensDataProto.getMetersPerSecond());
         assertEquals(HttpStatus.OK, responseSensorData.getStatusCode());
 
-        assertEquals(parsedPerson.getId(), PERSON_PROTO.getId());
-        assertEquals(parsedPerson.getName(), PERSON_PROTO.getName());
-        assertEquals(parsedPerson.getSurname(), PERSON_PROTO.getSurname());
-        assertEquals(parsedPerson.getEmail(), PERSON_PROTO.getEmail());
+        assertEquals(parsedPerson.getId(), protoPerson.getId());
+        assertEquals(parsedPerson.getName(), protoPerson.getName());
+        assertEquals(parsedPerson.getSurname(), protoPerson.getSurname());
+        assertEquals(parsedPerson.getEmail(), protoPerson.getEmail());
         assertEquals(HttpStatus.OK, responsePerson.getStatusCode());
     }
 }

@@ -42,6 +42,8 @@ public class DdssCatalogTestProps {
 
     @Value("${record.id}")
     private int recId;
+    @Value("${record.about}")
+    private String recAbout;
 
     @Value("${cat_rec_id.upload_sensors_data}")
     private int catRecIdUploadSensorsData;

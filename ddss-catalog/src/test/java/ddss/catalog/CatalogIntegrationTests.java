@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CatalogIntegrationTests extends IntegrationTests {
 
-    private static final String TEST_RECORD_ABOUT = "test catalog record 1";
     private static final String TEST_RECORD_PROTO_SCHEME = "message SensorData { int32 data = 1; }";
     private static final int TEST_RECORD_FOR_CREATE_ID = 13;
     private static final String TEST_RECORD_FOR_CREATE_ABOUT = "test catalog record for create";
@@ -62,7 +61,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
         // assert
         assert result != null;
         assertEquals(tprops.getRecId(), result.getId());
-        assertEquals(TEST_RECORD_ABOUT, result.getAbout());
+        assertEquals(tprops.getRecAbout(), result.getAbout());
         assertEquals(TEST_RECORD_PROTO_SCHEME, result.getProtoScheme());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }

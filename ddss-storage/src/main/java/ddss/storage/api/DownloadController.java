@@ -21,9 +21,16 @@ public class DownloadController {
     DepositRepository depositRepo;
 
     @GetMapping(value = "/download/{catalogRecordId}", consumes = "application/json")
-    public ResponseEntity<Data> download(@PathVariable int catalogRecordId, @AuthenticationPrincipal DeviceUser user) {
+    public ResponseEntity<Data> download(
+            @PathVariable int catalogRecordId, @AuthenticationPrincipal DeviceUser user) {
+
         Deposit deposit = depositRepo.findDepositByCatalogRecordId(catalogRecordId);
-        Data data = new Data(deposit.getData());
-        return new ResponseEntity<>(data, HttpStatus.OK);
+
+        if (deposit != null) {
+            Data data = new Data(deposit.getData());
+            return new ResponseEntity<>(data, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 }

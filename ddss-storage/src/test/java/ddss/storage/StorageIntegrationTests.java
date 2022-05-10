@@ -20,7 +20,8 @@ public class StorageIntegrationTests extends IntegrationTests {
     private static final String UPLOAD_ADDRESS = "/storage/upload";
     private static final String DOWNLOAD_ADDRESS = "/storage/download";
     private static final int CATALOG_RECORD_ID_TO_UPLOAD = 11;
-    private static final int CATALOG_RECORD_ID_TO_DOWNLOAD = 12;
+    private static final int CATALOG_RECORD_ID_TO_DOWNLOAD_OK = 12;
+    private static final int CATALOG_RECORD_ID_TO_DOWNLOAD_NOT_FOUND = 13;
 
     private static final String USERNAME = "kuznetsov";
     private static final String PASSWORD = "qwerty";
@@ -58,11 +59,11 @@ public class StorageIntegrationTests extends IntegrationTests {
         // arrange
         HttpEntity<Data> request = new HttpEntity<>(SENSORS_DATA_TO_SEND);
         restTemplate.withBasicAuth(USERNAME, PASSWORD)
-                .exchange(UPLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD, HttpMethod.POST, request, Feedback.class);
+                .exchange(UPLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_OK, HttpMethod.POST, request, Feedback.class);
 
         // act
         ResponseEntity<Data> response = restTemplate.withBasicAuth(USERNAME, PASSWORD)
-                .exchange(DOWNLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD, HttpMethod.GET, request, Data.class);
+                .exchange(DOWNLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_OK, HttpMethod.GET, request, Data.class);
         String result = Objects.requireNonNull(
                 response.getBody()).getBytes();
         SensorsData parsedSensorsData = SensorsData.parseFrom(result.getBytes());
@@ -72,5 +73,19 @@ public class StorageIntegrationTests extends IntegrationTests {
         assertEquals(parsedSensorsData.getPascals(), SENSORS_DATA_PROTO.getPascals());
         assertEquals(parsedSensorsData.getMetersPerSecond(), SENSORS_DATA_PROTO.getMetersPerSecond());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    @FlywayTest
+    public void get_download_with_status_not_found() {
+        // arrange
+        HttpEntity<Data> request = new HttpEntity<>(SENSORS_DATA_TO_SEND);
+
+        // act
+        ResponseEntity<Data> response = restTemplate.withBasicAuth(USERNAME, PASSWORD)
+                .exchange(DOWNLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_NOT_FOUND, HttpMethod.GET, request, Data.class);
+
+        // assert
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }

@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CatalogIntegrationTests extends IntegrationTests {
 
-    private static final int TEST_RECORD_ID_FOR_FORBIDDEN = 12;
-    private static final int TEST_RECORD_ID_FOR_NOT_FOUND = 13;
     @Autowired
     private DdssCatalogTestProps tprops;
 
@@ -66,7 +64,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
     @FlywayTest
     public void get_record_by_id_with_status_not_found() {
         // arrange
-        String testUrl = tprops.getUrlRecord() + "/" + TEST_RECORD_ID_FOR_NOT_FOUND;
+        String testUrl = tprops.getUrlRecord() + "/" + tprops.getRecIdForNotFound();
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
@@ -98,7 +96,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
     @FlywayTest
     public void delete_record_with_status_forbidden() {
         // arrange
-        String testUrl = tprops.getUrlRecord() + "/" + TEST_RECORD_ID_FOR_FORBIDDEN;
+        String testUrl = tprops.getUrlRecord() + "/" + tprops.getRecIdForForbidden();
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
@@ -114,7 +112,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
     @FlywayTest
     public void delete_record_with_status_not_found() {
         // arrange
-        String testUrl = tprops.getUrlRecord() + "/" + TEST_RECORD_ID_FOR_NOT_FOUND;
+        String testUrl = tprops.getUrlRecord() + "/" + tprops.getRecIdForNotFound();
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act

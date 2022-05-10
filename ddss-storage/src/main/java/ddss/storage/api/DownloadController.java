@@ -24,7 +24,7 @@ public class DownloadController {
     public ResponseEntity<Data> download(
             @PathVariable int catalogRecordId, @AuthenticationPrincipal DeviceUser user) {
 
-        Deposit deposit = depositRepo.findDepositByCatalogRecordId(catalogRecordId);
+        Deposit deposit = depositRepo.findByCatalogRecordId(catalogRecordId);
 
         if (deposit != null) {
             Data data = new Data(deposit.getData());

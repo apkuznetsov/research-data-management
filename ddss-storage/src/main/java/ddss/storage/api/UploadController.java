@@ -32,6 +32,6 @@ public class UploadController {
         Deposit deposit = new Deposit(1, LocalDateTime.now(), data.getBytes().getBytes());
         depositRepo.save(deposit);
 
-        return new ResponseEntity<>(feedback, HttpStatus.OK);
+        return new ResponseEntity<>(feedback, HttpStatus.CREATED);
     }
 }

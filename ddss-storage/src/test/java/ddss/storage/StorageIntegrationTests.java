@@ -23,14 +23,14 @@ public class StorageIntegrationTests extends IntegrationTests {
     @Autowired
     private DdssStorageTestProps tprops;
 
-    private SensorsData sensDataProto;
+    private SensorsData protoSensData;
     private Data dataSensData;
     private Person protoPerson;
     private Data dataPerson;
 
     @BeforeEach
     public void init() {
-        sensDataProto = SensorsData.newBuilder()
+        protoSensData = SensorsData.newBuilder()
                 .setDegreesCelsius(tprops.getSensDataDegrees())
                 .setPascals(tprops.getSensDataPascals())
                 .setMetersPerSecond(tprops.getSensDataMetersPerSecond()).build();
@@ -40,7 +40,7 @@ public class StorageIntegrationTests extends IntegrationTests {
                 .setSurname(tprops.getPersonSurname())
                 .setEmail(tprops.getPersonEmail()).build();
         dataSensData = new Data(
-                sensDataProto.toByteArray());
+                protoSensData.toByteArray());
         dataPerson = new Data(
                 protoPerson.toByteArray());
     }
@@ -61,9 +61,9 @@ public class StorageIntegrationTests extends IntegrationTests {
         SensorsData parsedSensorsData = SensorsData.parseFrom(result.getBytes());
 
         // assert
-        assertEquals(parsedSensorsData.getDegreesCelsius(), sensDataProto.getDegreesCelsius());
-        assertEquals(parsedSensorsData.getPascals(), sensDataProto.getPascals());
-        assertEquals(parsedSensorsData.getMetersPerSecond(), sensDataProto.getMetersPerSecond());
+        assertEquals(parsedSensorsData.getDegreesCelsius(), protoSensData.getDegreesCelsius());
+        assertEquals(parsedSensorsData.getPascals(), protoSensData.getPascals());
+        assertEquals(parsedSensorsData.getMetersPerSecond(), protoSensData.getMetersPerSecond());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
@@ -86,9 +86,9 @@ public class StorageIntegrationTests extends IntegrationTests {
         SensorsData parsedSensorsData = SensorsData.parseFrom(result.getBytes());
 
         // assert
-        assertEquals(parsedSensorsData.getDegreesCelsius(), sensDataProto.getDegreesCelsius());
-        assertEquals(parsedSensorsData.getPascals(), sensDataProto.getPascals());
-        assertEquals(parsedSensorsData.getMetersPerSecond(), sensDataProto.getMetersPerSecond());
+        assertEquals(parsedSensorsData.getDegreesCelsius(), protoSensData.getDegreesCelsius());
+        assertEquals(parsedSensorsData.getPascals(), protoSensData.getPascals());
+        assertEquals(parsedSensorsData.getMetersPerSecond(), protoSensData.getMetersPerSecond());
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
@@ -141,9 +141,9 @@ public class StorageIntegrationTests extends IntegrationTests {
         Person parsedPerson = Person.parseFrom(resultPerson.getBytes());
 
         // assert
-        assertEquals(parsedSensorsData.getDegreesCelsius(), sensDataProto.getDegreesCelsius());
-        assertEquals(parsedSensorsData.getPascals(), sensDataProto.getPascals());
-        assertEquals(parsedSensorsData.getMetersPerSecond(), sensDataProto.getMetersPerSecond());
+        assertEquals(parsedSensorsData.getDegreesCelsius(), protoSensData.getDegreesCelsius());
+        assertEquals(parsedSensorsData.getPascals(), protoSensData.getPascals());
+        assertEquals(parsedSensorsData.getMetersPerSecond(), protoSensData.getMetersPerSecond());
         assertEquals(HttpStatus.OK, responseSensorData.getStatusCode());
 
         assertEquals(parsedPerson.getId(), protoPerson.getId());

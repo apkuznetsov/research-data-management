@@ -43,4 +43,11 @@ public class DdssStorageTestProps {
     private int catRecIdDownloadOk;
     @Value("${cat_rec_id.download_not_found}")
     private int catRecIdDownloadNotFound;
+
+    @Value("${sensors_data.degrees_celsius}")
+    private int sensDataDegrees;
+    @Value("${sensors_data.pascals}")
+    private int sensDataPascals;
+    @Value("${sensors_data.meters_per_second}")
+    private int sensDataMetersPerSecond;
 }

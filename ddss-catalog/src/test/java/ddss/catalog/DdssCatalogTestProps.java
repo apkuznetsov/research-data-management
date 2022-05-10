@@ -40,6 +40,9 @@ public class DdssCatalogTestProps {
     @Value("${url.storage.download}")
     private String urlDownload;
 
+    @Value("${record.id}")
+    private int recId;
+
     @Value("${cat_rec_id.upload_sensors_data}")
     private int catRecIdUploadSensorsData;
     @Value("${cat_rec_id.upload_person}")

@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CatalogIntegrationTests extends IntegrationTests {
 
-    private static final int TEST_RECORD_ID = 11;
     private static final String TEST_RECORD_ABOUT = "test catalog record 1";
     private static final String TEST_RECORD_PROTO_SCHEME = "message SensorData { int32 data = 1; }";
     private static final int TEST_RECORD_FOR_CREATE_ID = 13;
@@ -51,7 +50,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
     @FlywayTest
     public void get_record_by_id_with_status_ok() {
         // arrange
-        String testUrl = tprops.getUrlRecord() + "/" + TEST_RECORD_ID;
+        String testUrl = tprops.getUrlRecord() + "/" + tprops.getRecId();
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
@@ -62,7 +61,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
 
         // assert
         assert result != null;
-        assertEquals(TEST_RECORD_ID, result.getId());
+        assertEquals(tprops.getRecId(), result.getId());
         assertEquals(TEST_RECORD_ABOUT, result.getAbout());
         assertEquals(TEST_RECORD_PROTO_SCHEME, result.getProtoScheme());
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -88,7 +87,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
     @FlywayTest
     public void delete_record_with_status_no_content() {
         // arrange
-        String testUrl = tprops.getUrlRecord() + "/" + TEST_RECORD_ID;
+        String testUrl = tprops.getUrlRecord() + "/" + tprops.getRecId();
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act

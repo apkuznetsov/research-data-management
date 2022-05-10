@@ -26,6 +26,9 @@ public class DdssCatalogTestProps {
     @Value("${user2.about}")
     private String about2;
 
+    @Value("${url.catalog.record}")
+    private String urlRecord;
+
     @Value("${url.storage.register}")
     private String urlRegister;
     @Value("${url.storage.available_megabytes}")

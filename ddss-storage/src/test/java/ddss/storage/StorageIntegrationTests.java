@@ -16,6 +16,10 @@ public class StorageIntegrationTests extends IntegrationTests {
 
     private static final String UPLOAD_ADDRESS = "/storage/upload";
     private static final String DOWNLOAD_ADDRESS = "/storage/download";
+    private static final int CATALOG_RECORD_ID_TO_UPLOAD = 11;
+
+    private static final String USERNAME = "kuznetsov";
+    private static final String PASSWORD = "qwerty";
 
     private static final SensorsData SENSORS_DATA_PROTO = SensorsData.newBuilder()
             .setDegreesCelsius(20)
@@ -31,8 +35,8 @@ public class StorageIntegrationTests extends IntegrationTests {
         HttpEntity<Data> request = new HttpEntity<>(SENSORS_DATA_TO_SEND);
 
         // act
-        ResponseEntity<Feedback> response = restTemplate.exchange(
-                UPLOAD_ADDRESS, HttpMethod.POST, request, Feedback.class);
+        ResponseEntity<Feedback> response = restTemplate.withBasicAuth(USERNAME, PASSWORD)
+                .exchange(UPLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_UPLOAD, HttpMethod.POST, request, Feedback.class);
         String result = Objects.requireNonNull(
                 response.getBody()).getBytes();
         SensorsData parsedSensorsData = SensorsData.parseFrom(result.getBytes());

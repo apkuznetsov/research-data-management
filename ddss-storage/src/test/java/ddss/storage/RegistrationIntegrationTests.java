@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegistrationIntegrationTests extends IntegrationTests {
 
-    private static final String CAT_REGISTER = "/cat/register";
+    private static final String STORAGE_REGISTER = "/storage/register";
 
     private static final RegistrationForm REG_FORM_ALREADY_CREATED_USER =
             new RegistrationForm("kuznetsov", "qwerty", "test device 1");
@@ -27,7 +27,7 @@ public class RegistrationIntegrationTests extends IntegrationTests {
 
         // act
         ResponseEntity<RegistrationForm> response = restTemplate.exchange(
-                CAT_REGISTER, HttpMethod.POST, request, RegistrationForm.class);
+                STORAGE_REGISTER, HttpMethod.POST, request, RegistrationForm.class);
 
         // assert
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -41,7 +41,7 @@ public class RegistrationIntegrationTests extends IntegrationTests {
 
         // act
         ResponseEntity<RegistrationForm> response = restTemplate.exchange(
-                CAT_REGISTER, HttpMethod.POST, request, RegistrationForm.class);
+                STORAGE_REGISTER, HttpMethod.POST, request, RegistrationForm.class);
 
         // assert
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());

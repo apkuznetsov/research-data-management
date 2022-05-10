@@ -25,4 +25,13 @@ public class DdssStorageTestProps {
     private String password2;
     @Value("${user2.about}")
     private String about2;
+
+    @Value("${url.storage.register}")
+    private String urlRegister;
+    @Value("${url.storage.available-megabytes}")
+    private String urlAvailableMegabytes;
+    @Value("${url.storage.upload}")
+    private String urlUpload;
+    @Value("${url.storage.download}")
+    private String urlDownload;
 }

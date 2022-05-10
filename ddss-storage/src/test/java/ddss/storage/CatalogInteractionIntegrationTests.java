@@ -15,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CatalogInteractionIntegrationTests extends IntegrationTests {
 
     private static final String STORAGE_AVAILABLE_MEGABYTES = "/storage/admin/available-megabytes";
-    private static final String USERNAME = "kuznetsov";
-    private static final String PASSWORD = "qwerty";
     @Autowired
     public TestRestTemplate restTemplate;
     @Autowired
     DdssStorageProps props;
+    @Autowired
+    DdssStorageTestProps tprops;
 
     @Test
     @FlywayTest
@@ -47,7 +47,8 @@ public class CatalogInteractionIntegrationTests extends IntegrationTests {
         HttpEntity<AvailableMegabytesNumber> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
-        ResponseEntity<AvailableMegabytesNumber> response = restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        ResponseEntity<AvailableMegabytesNumber> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(STORAGE_AVAILABLE_MEGABYTES, HttpMethod.GET, request, AvailableMegabytesNumber.class);
 
         // assert

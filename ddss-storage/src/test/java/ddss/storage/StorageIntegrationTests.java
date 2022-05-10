@@ -7,6 +7,7 @@ import ddss.storage.domain.Data;
 import ddss.storage.domain.Feedback;
 import org.flywaydb.test.annotation.FlywayTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -24,17 +25,12 @@ public class StorageIntegrationTests extends IntegrationTests {
     private static final int CATALOG_RECORD_ID_TO_DOWNLOAD_OK = 12;
     private static final int CATALOG_RECORD_ID_TO_DOWNLOAD_NOT_FOUND = 13;
     private static final int CATALOG_RECORD_ID_TO_UPLOAD_PERSON = 21;
-
-    private static final String USERNAME = "kuznetsov";
-    private static final String PASSWORD = "qwerty";
-
     private static final SensorsData SENSORS_DATA_PROTO = SensorsData.newBuilder()
             .setDegreesCelsius(20)
             .setPascals(100)
             .setMetersPerSecond(4).build();
     private static final byte[] SENSORS_DATA_BYTES = SENSORS_DATA_PROTO.toByteArray();
     private static final Data SENSORS_DATA_TO_SEND = new Data(SENSORS_DATA_BYTES);
-
     private static final Person PERSON_PROTO = Person.newBuilder()
             .setId(1)
             .setName("Andrey")
@@ -42,6 +38,8 @@ public class StorageIntegrationTests extends IntegrationTests {
             .setEmail("example@example").build();
     private static final byte[] PERSON_BYTES = PERSON_PROTO.toByteArray();
     private static final Data PERSON_TO_SEND = new Data(PERSON_BYTES);
+    @Autowired
+    DdssStorageTestProps tprops;
 
     @Test
     @FlywayTest
@@ -50,7 +48,8 @@ public class StorageIntegrationTests extends IntegrationTests {
         HttpEntity<Data> request = new HttpEntity<>(SENSORS_DATA_TO_SEND);
 
         // act
-        ResponseEntity<Feedback> response = restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        ResponseEntity<Feedback> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(UPLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_UPLOAD_SENSORS_DATA, HttpMethod.POST, request, Feedback.class);
         String result = Objects.requireNonNull(
                 response.getBody()).getBytes();
@@ -68,11 +67,13 @@ public class StorageIntegrationTests extends IntegrationTests {
     public void get_download_with_status_ok() throws InvalidProtocolBufferException {
         // arrange
         HttpEntity<Data> request = new HttpEntity<>(SENSORS_DATA_TO_SEND);
-        restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(UPLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_OK, HttpMethod.POST, request, Feedback.class);
 
         // act
-        ResponseEntity<Data> response = restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        ResponseEntity<Data> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(DOWNLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_OK, HttpMethod.GET, request, Data.class);
         String result = Objects.requireNonNull(
                 response.getBody()).getBytes();
@@ -92,7 +93,8 @@ public class StorageIntegrationTests extends IntegrationTests {
         HttpEntity<Data> request = new HttpEntity<>(SENSORS_DATA_TO_SEND);
 
         // act
-        ResponseEntity<Data> response = restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        ResponseEntity<Data> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(DOWNLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_NOT_FOUND, HttpMethod.GET, request, Data.class);
 
         // assert
@@ -107,22 +109,24 @@ public class StorageIntegrationTests extends IntegrationTests {
         HttpEntity<Data> requestPerson = new HttpEntity<>(PERSON_TO_SEND);
 
         // act
-        restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        restTemplate.withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(UPLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_UPLOAD_SENSORS_DATA,
                         HttpMethod.POST, requestSensorsData, Feedback.class);
 
-        restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        restTemplate.withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(UPLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_UPLOAD_PERSON,
                         HttpMethod.POST, requestPerson, Feedback.class);
 
-        ResponseEntity<Data> responseSensorData = restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        ResponseEntity<Data> responseSensorData = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(DOWNLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_UPLOAD_SENSORS_DATA,
                         HttpMethod.GET, requestSensorsData, Data.class);
         String resultSensorData = Objects.requireNonNull(
                 responseSensorData.getBody()).getBytes();
         SensorsData parsedSensorsData = SensorsData.parseFrom(resultSensorData.getBytes());
 
-        ResponseEntity<Data> responsePerson = restTemplate.withBasicAuth(USERNAME, PASSWORD)
+        ResponseEntity<Data> responsePerson = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(DOWNLOAD_ADDRESS + "/" + CATALOG_RECORD_ID_TO_UPLOAD_PERSON,
                         HttpMethod.GET, requestPerson, Data.class);
         String resultPerson = Objects.requireNonNull(

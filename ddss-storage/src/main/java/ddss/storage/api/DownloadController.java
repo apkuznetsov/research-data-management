@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/storage")
 public class DownloadController {
@@ -29,6 +32,22 @@ public class DownloadController {
         if (deposit != null) {
             Data data = new Data(deposit.getData());
             return new ResponseEntity<>(data, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value = "/download/all/{catalogRecordId}", consumes = "application/json")
+    public ResponseEntity<List<Data>> downloadAll(
+            @PathVariable int catalogRecordId, @AuthenticationPrincipal DeviceUser user) {
+
+        List<Deposit> depositList = depositRepo.findAllByCatalogRecordId(catalogRecordId);
+
+        if (!depositList.isEmpty()) {
+            List<Data> dataList = depositList.stream()
+                    .map(deposit -> new Data(deposit.getData()))
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(dataList, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }

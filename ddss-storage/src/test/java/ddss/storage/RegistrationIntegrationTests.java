@@ -15,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class RegistrationIntegrationTests extends IntegrationTests {
 
     @Autowired
-    DdssStorageTestProps tprops;
+    private DdssStorageTestProps tprops;
+    
     private RegistrationForm regFormAlreadyCreatedUser;
     private RegistrationForm regFormNewUser;
 

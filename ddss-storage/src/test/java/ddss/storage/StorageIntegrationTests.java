@@ -37,7 +37,7 @@ public class StorageIntegrationTests extends IntegrationTests {
     private static final byte[] PERSON_BYTES = PERSON_PROTO.toByteArray();
     private static final Data PERSON_TO_SEND = new Data(PERSON_BYTES);
     @Autowired
-    DdssStorageTestProps tprops;
+    private DdssStorageTestProps tprops;
 
     @Test
     @FlywayTest

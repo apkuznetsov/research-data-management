@@ -15,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CatalogInteractionIntegrationTests extends IntegrationTests {
 
     @Autowired
-    public TestRestTemplate restTemplate;
+    private DdssStorageProps props;
     @Autowired
-    DdssStorageProps props;
+    private DdssStorageTestProps tprops;
     @Autowired
-    DdssStorageTestProps tprops;
+    private TestRestTemplate restTemplate;
 
     @Test
     @FlywayTest

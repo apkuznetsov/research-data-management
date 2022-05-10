@@ -6,10 +6,7 @@ import ddss.storage.domain.Data;
 import ddss.storage.domain.Feedback;
 import org.flywaydb.test.annotation.FlywayTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 
 import java.util.Objects;
 
@@ -18,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StorageIntegrationTests extends IntegrationTests {
 
     private static final String UPLOAD_ADDRESS = "/storage/upload";
+    private static final String DOWNLOAD_ADDRESS = "/storage/download";
 
     private static final SensorsData SENSORS_DATA_PROTO = SensorsData.newBuilder()
             .setDegreesCelsius(20)
@@ -44,5 +42,28 @@ public class StorageIntegrationTests extends IntegrationTests {
         assertEquals(parsedSensorsData.getPascals(), SENSORS_DATA_PROTO.getPascals());
         assertEquals(parsedSensorsData.getMetersPerSecond(), SENSORS_DATA_PROTO.getMetersPerSecond());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
+
+    @Test
+    @FlywayTest
+    public void get_download_with_status_created() throws InvalidProtocolBufferException {
+        // arrange
+        HttpEntity<Data> uploadRequest = new HttpEntity<>(SENSORS_DATA_TO_SEND);
+        restTemplate.exchange(
+                UPLOAD_ADDRESS, HttpMethod.POST, uploadRequest, Feedback.class);
+        HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
+
+        // act
+        ResponseEntity<Data> response = restTemplate
+                .exchange(DOWNLOAD_ADDRESS, HttpMethod.GET, request, Data.class);
+        String result = Objects.requireNonNull(
+                response.getBody()).getBytes();
+        SensorsData parsedSensorsData = SensorsData.parseFrom(result.getBytes());
+
+        // assert
+        assertEquals(parsedSensorsData.getDegreesCelsius(), SENSORS_DATA_PROTO.getDegreesCelsius());
+        assertEquals(parsedSensorsData.getPascals(), SENSORS_DATA_PROTO.getPascals());
+        assertEquals(parsedSensorsData.getMetersPerSecond(), SENSORS_DATA_PROTO.getMetersPerSecond());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }

@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CatalogIntegrationTests extends IntegrationTests {
 
-    private static final String TEST_USERNAME = "kuznetsov";
-    private static final String TEST_PASSWORD = "qwerty";
     private static final int TEST_RECORD_ID = 11;
     private static final String TEST_RECORD_ABOUT = "test catalog record 1";
     private static final String TEST_RECORD_PROTO_SCHEME = "message SensorData { int32 data = 1; }";
@@ -36,7 +34,8 @@ public class CatalogIntegrationTests extends IntegrationTests {
         HttpEntity<CatalogRecord> request = new HttpEntity<>(record, new HttpHeaders());
 
         // act
-        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth(TEST_USERNAME, TEST_PASSWORD)
+        ResponseEntity<CatalogRecord> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(testUrl, HttpMethod.POST, request, CatalogRecord.class);
         CatalogRecord result = response.getBody();
 
@@ -56,7 +55,8 @@ public class CatalogIntegrationTests extends IntegrationTests {
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
-        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth(TEST_USERNAME, TEST_PASSWORD)
+        ResponseEntity<CatalogRecord> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(testUrl, HttpMethod.GET, request, CatalogRecord.class);
         CatalogRecord result = response.getBody();
 
@@ -76,7 +76,8 @@ public class CatalogIntegrationTests extends IntegrationTests {
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
-        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth(TEST_USERNAME, TEST_PASSWORD)
+        ResponseEntity<CatalogRecord> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(testUrl, HttpMethod.GET, request, CatalogRecord.class);
 
         // assert
@@ -91,7 +92,8 @@ public class CatalogIntegrationTests extends IntegrationTests {
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
-        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth(TEST_USERNAME, TEST_PASSWORD)
+        ResponseEntity<CatalogRecord> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(testUrl, HttpMethod.DELETE, request, CatalogRecord.class);
 
         // assert
@@ -106,7 +108,8 @@ public class CatalogIntegrationTests extends IntegrationTests {
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
-        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth(TEST_USERNAME, TEST_PASSWORD)
+        ResponseEntity<CatalogRecord> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(testUrl, HttpMethod.DELETE, request, CatalogRecord.class);
 
         // assert
@@ -121,7 +124,8 @@ public class CatalogIntegrationTests extends IntegrationTests {
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
 
         // act
-        ResponseEntity<CatalogRecord> response = restTemplate.withBasicAuth(TEST_USERNAME, TEST_PASSWORD)
+        ResponseEntity<CatalogRecord> response = restTemplate
+                .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(testUrl, HttpMethod.DELETE, request, CatalogRecord.class);
 
         // assert

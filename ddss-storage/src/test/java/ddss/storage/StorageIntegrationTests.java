@@ -19,10 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageIntegrationTests extends IntegrationTests {
 
-    private static final int CATALOG_RECORD_ID_TO_UPLOAD_SENSORS_DATA = 11;
-    private static final int CATALOG_RECORD_ID_TO_DOWNLOAD_OK = 12;
-    private static final int CATALOG_RECORD_ID_TO_DOWNLOAD_NOT_FOUND = 13;
-    private static final int CATALOG_RECORD_ID_TO_UPLOAD_PERSON = 21;
     private static final SensorsData SENSORS_DATA_PROTO = SensorsData.newBuilder()
             .setDegreesCelsius(20)
             .setPascals(100)
@@ -48,7 +44,7 @@ public class StorageIntegrationTests extends IntegrationTests {
         // act
         ResponseEntity<Feedback> response = restTemplate
                 .withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(tprops.getUrlUpload() + "/" + CATALOG_RECORD_ID_TO_UPLOAD_SENSORS_DATA,
+                .exchange(tprops.getUrlUpload() + "/" + tprops.getCatRecIdUploadSensorsData(),
                         HttpMethod.POST, request, Feedback.class);
         String result = Objects.requireNonNull(
                 response.getBody()).getBytes();
@@ -68,13 +64,13 @@ public class StorageIntegrationTests extends IntegrationTests {
         HttpEntity<Data> request = new HttpEntity<>(SENSORS_DATA_TO_SEND);
         restTemplate
                 .withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(tprops.getUrlUpload() + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_OK,
+                .exchange(tprops.getUrlUpload() + "/" + tprops.getCatRecIdUploadPerson(),
                         HttpMethod.POST, request, Feedback.class);
 
         // act
         ResponseEntity<Data> response = restTemplate
                 .withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(tprops.getUrlDownload() + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_OK, HttpMethod.GET, request, Data.class);
+                .exchange(tprops.getUrlDownload() + "/" + tprops.getCatRecIdUploadPerson(), HttpMethod.GET, request, Data.class);
         String result = Objects.requireNonNull(
                 response.getBody()).getBytes();
         SensorsData parsedSensorsData = SensorsData.parseFrom(result.getBytes());
@@ -95,7 +91,8 @@ public class StorageIntegrationTests extends IntegrationTests {
         // act
         ResponseEntity<Data> response = restTemplate
                 .withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(tprops.getUrlDownload() + "/" + CATALOG_RECORD_ID_TO_DOWNLOAD_NOT_FOUND, HttpMethod.GET, request, Data.class);
+                .exchange(tprops.getUrlDownload() + "/" + tprops.getCatRecIdDownloadOk(),
+                        HttpMethod.GET, request, Data.class);
 
         // assert
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -110,16 +107,16 @@ public class StorageIntegrationTests extends IntegrationTests {
 
         // act
         restTemplate.withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(tprops.getUrlUpload() + "/" + CATALOG_RECORD_ID_TO_UPLOAD_SENSORS_DATA,
+                .exchange(tprops.getUrlUpload() + "/" + tprops.getCatRecIdUploadSensorsData(),
                         HttpMethod.POST, requestSensorsData, Feedback.class);
 
         restTemplate.withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(tprops.getUrlUpload() + "/" + CATALOG_RECORD_ID_TO_UPLOAD_PERSON,
+                .exchange(tprops.getUrlUpload() + "/" + tprops.getCatRecIdDownloadNotFound(),
                         HttpMethod.POST, requestPerson, Feedback.class);
 
         ResponseEntity<Data> responseSensorData = restTemplate
                 .withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(tprops.getUrlDownload() + "/" + CATALOG_RECORD_ID_TO_UPLOAD_SENSORS_DATA,
+                .exchange(tprops.getUrlDownload() + "/" + tprops.getCatRecIdUploadSensorsData(),
                         HttpMethod.GET, requestSensorsData, Data.class);
         String resultSensorData = Objects.requireNonNull(
                 responseSensorData.getBody()).getBytes();
@@ -127,7 +124,7 @@ public class StorageIntegrationTests extends IntegrationTests {
 
         ResponseEntity<Data> responsePerson = restTemplate
                 .withBasicAuth(tprops.getUsername(), tprops.getPassword())
-                .exchange(tprops.getUrlDownload() + "/" + CATALOG_RECORD_ID_TO_UPLOAD_PERSON,
+                .exchange(tprops.getUrlDownload() + "/" + tprops.getCatRecIdDownloadNotFound(),
                         HttpMethod.GET, requestPerson, Data.class);
         String resultPerson = Objects.requireNonNull(
                 responsePerson.getBody()).getBytes();

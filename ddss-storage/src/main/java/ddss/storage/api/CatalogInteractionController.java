@@ -1,6 +1,6 @@
 package ddss.storage.api;
 
-import ddss.storage.domain.Data;
+import ddss.storage.domain.AvailableMegabytesNumber;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,9 @@ public class CatalogInteractionController {
     }
 
     @GetMapping(value = "/available-megabytes")
-    public ResponseEntity<Long> getAvailableMegabytes() {
-        return new ResponseEntity<>(calcAvailableMegabytes(), HttpStatus.OK);
+    public ResponseEntity<AvailableMegabytesNumber> getAvailableMegabytes() {
+        return new ResponseEntity<>(
+                new AvailableMegabytesNumber(calcAvailableMegabytes()),
+                HttpStatus.OK);
     }
 }

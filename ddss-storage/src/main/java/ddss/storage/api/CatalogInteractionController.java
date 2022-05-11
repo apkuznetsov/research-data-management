@@ -2,7 +2,7 @@ package ddss.storage.api;
 
 import ddss.storage.DdssStorageProps;
 import ddss.storage.domain.AvailableMegabytesNumber;
-import ddss.storage.domain.DeviceUser;
+import ddss.storage.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class CatalogInteractionController {
     }
 
     @GetMapping(value = "/available-megabytes")
-    public ResponseEntity<AvailableMegabytesNumber> getAvailableMegabytes(@AuthenticationPrincipal DeviceUser user) {
+    public ResponseEntity<AvailableMegabytesNumber> getAvailableMegabytes(@AuthenticationPrincipal CatalogUser user) {
         if (!user.getUsername().equals(props.getAdminUsername()))
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
 

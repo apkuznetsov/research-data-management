@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "device_user")
-public class DeviceUser implements UserDetails {
+public class CatalogUser implements UserDetails {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -25,10 +25,10 @@ public class DeviceUser implements UserDetails {
     @Column(name = "about")
     private String about;
 
-    public DeviceUser() {
+    public CatalogUser() {
     }
 
-    public DeviceUser(String username, String passwordEncoded, String about) {
+    public CatalogUser(String username, String passwordEncoded, String about) {
         this.username = username;
         this.password = passwordEncoded;
         this.about = about;

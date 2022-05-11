@@ -3,7 +3,7 @@ package ddss.storage.api;
 import ddss.storage.data.DepositRepository;
 import ddss.storage.domain.Data;
 import ddss.storage.domain.Deposit;
-import ddss.storage.domain.DeviceUser;
+import ddss.storage.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class DownloadController {
 
     @GetMapping(value = "/download/{catalogRecordId}", consumes = "application/json")
     public ResponseEntity<Data> download(
-            @PathVariable int catalogRecordId, @AuthenticationPrincipal DeviceUser user) {
+            @PathVariable int catalogRecordId, @AuthenticationPrincipal CatalogUser user) {
 
         Deposit deposit = depositRepo.findByCatalogRecordId(catalogRecordId);
 
@@ -39,7 +39,7 @@ public class DownloadController {
 
     @GetMapping(value = "/download/all/{catalogRecordId}", consumes = "application/json")
     public ResponseEntity<List<Data>> downloadAll(
-            @PathVariable int catalogRecordId, @AuthenticationPrincipal DeviceUser user) {
+            @PathVariable int catalogRecordId, @AuthenticationPrincipal CatalogUser user) {
 
         List<Deposit> depositList = depositRepo.findAllByCatalogRecordId(catalogRecordId);
 

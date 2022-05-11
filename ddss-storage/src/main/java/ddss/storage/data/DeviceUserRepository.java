@@ -1,12 +1,12 @@
 package ddss.storage.data;
 
-import ddss.storage.domain.DeviceUser;
+import ddss.storage.domain.CatalogUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DeviceUserRepository extends JpaRepository<DeviceUser, Integer> {
+public interface DeviceUserRepository extends JpaRepository<CatalogUser, Integer> {
 
-    DeviceUser findByUsername(String username);
+    CatalogUser findByUsername(String username);
 
 }

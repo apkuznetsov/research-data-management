@@ -1,6 +1,6 @@
 package ddss.storage.security;
 
-import ddss.storage.domain.DeviceUser;
+import ddss.storage.domain.CatalogUser;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -20,8 +20,8 @@ public class RegistrationForm {
         this.about = about;
     }
 
-    public DeviceUser toDeviceUser(PasswordEncoder passwordEncoder) {
-        return new DeviceUser(
+    public CatalogUser toDeviceUser(PasswordEncoder passwordEncoder) {
+        return new CatalogUser(
                 username, passwordEncoder.encode(password),
                 about);
     }

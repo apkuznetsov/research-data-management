@@ -28,7 +28,7 @@ public class CatalogRecord {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "device_user_id", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private DeviceUser deviceUser;
+    private CatalogUser catalogUser;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogRecord")
     @JsonIgnore
@@ -59,7 +59,7 @@ public class CatalogRecord {
         this.id = id;
     }
 
-    public void setUser(DeviceUser deviceUser) {
-        this.deviceUser = deviceUser;
+    public void setUser(CatalogUser catalogUser) {
+        this.catalogUser = catalogUser;
     }
 }

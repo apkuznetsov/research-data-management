@@ -1,7 +1,7 @@
 package ddss.catalog.security;
 
 import ddss.catalog.data.DeviceUserRepository;
-import ddss.catalog.domain.DeviceUser;
+import ddss.catalog.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class RegistrationController {
 
     @PostMapping(value = "/cat/register", consumes = "application/json")
     public ResponseEntity<RegistrationForm> register(@RequestBody RegistrationForm form) {
-        DeviceUser foundUser = userRepo.findByUsername(form.getUsername());
+        CatalogUser foundUser = userRepo.findByUsername(form.getUsername());
         if (foundUser == null) {
             userRepo.save(form.toDeviceUser(bCryptPasswordEncoder));
             return new ResponseEntity<>(form, HttpStatus.CREATED);

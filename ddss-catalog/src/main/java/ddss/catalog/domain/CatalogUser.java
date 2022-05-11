@@ -50,10 +50,14 @@ public class CatalogUser implements UserDetails {
     public CatalogUser() {
     }
 
-    public CatalogUser(String username, String passwordEncoded, String about) {
+    public CatalogUser(String username, String passwordEncoded, String about,
+                       String ipAddress, short port, boolean isStorage) {
         this.username = username;
         this.password = passwordEncoded;
         this.about = about;
+        this.ipAddress = ipAddress;
+        this.port = port;
+        this.isStorage = isStorage;
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

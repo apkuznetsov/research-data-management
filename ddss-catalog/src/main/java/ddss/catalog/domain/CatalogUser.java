@@ -74,7 +74,7 @@ public class CatalogUser implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_DEVICE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_CATALOG_USER"));
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

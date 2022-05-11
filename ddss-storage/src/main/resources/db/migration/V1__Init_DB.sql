@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS device_user
+CREATE TABLE IF NOT EXISTS catalog_user
 (
     id       SERIAL PRIMARY KEY,
     username VARCHAR(64) NOT NULL,
@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS deposit
     saved_at          TIMESTAMP NOT NULL
 );
 
-alter table device_user
-    add constraint uniq_device_user_username unique (username);
+alter table catalog_user
+    add constraint uniq_catalog_user_username unique (username);

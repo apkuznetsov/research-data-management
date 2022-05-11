@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "device_user")
+@Table(name = "catalog_user")
 public class CatalogUser implements UserDetails {
 
     private static final long serialVersionUID = 1L;

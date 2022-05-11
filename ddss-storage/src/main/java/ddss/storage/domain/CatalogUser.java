@@ -1,8 +1,8 @@
-package ddss.catalog.domain;
+package ddss.storage.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,8 +12,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "device_user")
-public class DeviceUser implements UserDetails {
+@Table(name = "catalog_user")
+@Getter
+@Setter
+public class CatalogUser implements UserDetails {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -26,43 +28,24 @@ public class DeviceUser implements UserDetails {
     private String password;
     @Column(name = "about")
     private String about;
+    @Column(name = "ip_address", nullable = false)
+    private String ipAddress;
+    @Column(name = "port", nullable = false)
+    private short port;
+    @Column(name = "is_storage", nullable = false)
+    private boolean isStorage;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "deviceUser")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<CatalogRecord> catalogRecords;
-
-    public DeviceUser() {
+    public CatalogUser() {
     }
 
-    public DeviceUser(String username, String passwordEncoded, String about) {
+    public CatalogUser(String username, String passwordEncoded, String about,
+                       String ipAddress, short port, boolean isStorage) {
         this.username = username;
         this.password = passwordEncoded;
         this.about = about;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
+        this.ipAddress = ipAddress;
+        this.port = port;
+        this.isStorage = isStorage;
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -74,7 +57,7 @@ public class DeviceUser implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_DEVICE_USER"));
+        return List.of(new SimpleGrantedAuthority("ROLE_CATALOG_USER"));
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

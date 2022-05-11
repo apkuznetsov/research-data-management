@@ -3,7 +3,7 @@ package ddss.storage.api;
 import ddss.storage.data.DepositRepository;
 import ddss.storage.domain.Data;
 import ddss.storage.domain.Deposit;
-import ddss.storage.domain.DeviceUser;
+import ddss.storage.domain.CatalogUser;
 import ddss.storage.domain.Feedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class UploadController {
 
     @PostMapping(value = "/upload/{catalogRecordId}", consumes = "application/json")
     public ResponseEntity<Feedback> upload(
-            @PathVariable int catalogRecordId, @RequestBody Data data, @AuthenticationPrincipal DeviceUser user) {
+            @PathVariable int catalogRecordId, @RequestBody Data data, @AuthenticationPrincipal CatalogUser user) {
 
         Feedback feedback = new Feedback(
                 "bytes " + data.getBytes() + " with " + data.getBytes().length() + " length uploaded",

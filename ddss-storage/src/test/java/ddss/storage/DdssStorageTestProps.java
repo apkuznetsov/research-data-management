@@ -18,6 +18,12 @@ public class DdssStorageTestProps {
     private String password;
     @Value("${user.about}")
     private String about;
+    @Value("${user.ip_address}")
+    private String ipAddress;
+    @Value("${user.port}")
+    private short port;
+    @Value("${user.is_storage}")
+    private boolean isStorage;
 
     @Value("${user2.username}")
     private String username2;
@@ -25,6 +31,12 @@ public class DdssStorageTestProps {
     private String password2;
     @Value("${user2.about}")
     private String about2;
+    @Value("${user2.ip_address}")
+    private String ipAddress2;
+    @Value("${user2.port}")
+    private short port2;
+    @Value("${user2.is_storage}")
+    private boolean isStorage2;
 
     @Value("${url.storage.register}")
     private String urlRegister;

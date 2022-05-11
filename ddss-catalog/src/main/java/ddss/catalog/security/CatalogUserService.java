@@ -1,7 +1,7 @@
-package ddss.storage.security;
+package ddss.catalog.security;
 
-import ddss.storage.data.DeviceUserRepository;
-import ddss.storage.domain.DeviceUser;
+import ddss.catalog.data.CatalogUserRepository;
+import ddss.catalog.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 
 @Component
 @Service
-public class DeviceUserService implements UserDetailsService {
+public class CatalogUserService implements UserDetailsService {
 
     @Autowired
-    private DeviceUserRepository repo;
+    private CatalogUserRepository repo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        DeviceUser user = repo.findByUsername(username);
+        CatalogUser user = repo.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(
                     "device user '" + username + "' not found");

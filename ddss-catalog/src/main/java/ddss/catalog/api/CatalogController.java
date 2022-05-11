@@ -2,7 +2,7 @@ package ddss.catalog.api;
 
 import ddss.catalog.data.CatalogRecordRepository;
 import ddss.catalog.domain.CatalogRecord;
-import ddss.catalog.domain.DeviceUser;
+import ddss.catalog.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class CatalogController {
 
     @PostMapping(value = "/record/create", consumes = "application/json")
     public ResponseEntity<CatalogRecord> createCreate(
-            @Valid @RequestBody CatalogRecord record, @AuthenticationPrincipal DeviceUser user) {
+            @Valid @RequestBody CatalogRecord record, @AuthenticationPrincipal CatalogUser user) {
 
         record.setUser(user);
         catalogRepo.save(record);
@@ -30,7 +30,7 @@ public class CatalogController {
 
     @GetMapping(path = "/record/{id}")
     public ResponseEntity<CatalogRecord> getRecordById(
-            @PathVariable int id, @AuthenticationPrincipal DeviceUser user) {
+            @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
         CatalogRecord record = catalogRepo.findById(id).orElse(null);
         return record == null
@@ -40,13 +40,13 @@ public class CatalogController {
 
     @DeleteMapping("/record/{id}")
     public ResponseEntity deleteRecordById(
-            @PathVariable int id, @AuthenticationPrincipal DeviceUser user) {
+            @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
         ResponseEntity response;
 
         CatalogRecord record = catalogRepo.findById(id).orElse(null);
         if (record != null) {
-            if (record.getDeviceUser().getUsername().equals(user.getUsername())) {
+            if (record.getCatalogUser().getUsername().equals(user.getUsername())) {
                 catalogRepo.deleteById(id);
                 response = new ResponseEntity(HttpStatus.NO_CONTENT);
             } else {

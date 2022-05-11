@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS device_user
+CREATE TABLE IF NOT EXISTS catalog_user
 (
     id       SERIAL PRIMARY KEY,
     username VARCHAR(64) NOT NULL,
@@ -8,11 +8,11 @@ CREATE TABLE IF NOT EXISTS device_user
 
 CREATE TABLE IF NOT EXISTS catalog_record
 (
-    id             SERIAL PRIMARY KEY,
-    about          VARCHAR(2048),
-    proto_scheme   VARCHAR(2048) NOT NULL,
-    created_at     TIMESTAMP     NOT NULL,
-    device_user_id INTEGER
+    id              SERIAL PRIMARY KEY,
+    about           VARCHAR(2048),
+    proto_scheme    VARCHAR(2048) NOT NULL,
+    created_at      TIMESTAMP     NOT NULL,
+    catalog_user_id INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS storage_user
@@ -34,15 +34,15 @@ CREATE TABLE IF NOT EXISTS catalog_with_storage_record
     storage_user_id   INTEGER
 );
 
-alter table device_user
-    add constraint uniq_device_user_username unique (username);
+alter table catalog_user
+    add constraint uniq_catalog_user_id_username unique (username);
 
 alter table storage_user
     add constraint uniq_storage_user_username unique (username);
 
 alter table catalog_record
-    add constraint fk_catalog_record_device_user_id
-        foreign key (device_user_id) references device_user;
+    add constraint fk_catalog_record_catalog_user_id
+        foreign key (catalog_user_id) references catalog_user;
 
 alter table catalog_with_storage_record
     add constraint fk_catalog_with_storage_record_catalog_record_id

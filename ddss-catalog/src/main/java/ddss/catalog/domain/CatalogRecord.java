@@ -26,7 +26,7 @@ public class CatalogRecord {
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_user_id", nullable = false)
+    @JoinColumn(name = "catalog_user_id", nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private CatalogUser catalogUser;
 

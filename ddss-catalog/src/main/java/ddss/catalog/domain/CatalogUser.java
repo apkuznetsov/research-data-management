@@ -40,6 +40,11 @@ public class CatalogUser implements UserDetails {
     @JsonIgnore
     private List<CatalogRecord> catalogRecords;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogUser")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<CatalogWithStorageRecord> catalogWithStorageRecords;
+
     public CatalogUser() {
     }
 

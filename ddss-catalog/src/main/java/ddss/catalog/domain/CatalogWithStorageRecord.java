@@ -22,8 +22,8 @@ public class CatalogWithStorageRecord {
     private CatalogRecord catalogRecord;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "storage_user_id", nullable = false)
-    private StorageUser storageUser;
+    @JoinColumn(name = "catalog_user_id", nullable = false)
+    private CatalogUser catalogUser;
 
     public CatalogWithStorageRecord() {
     }

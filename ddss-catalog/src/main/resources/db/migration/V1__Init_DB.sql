@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS catalog_with_storage_record
     id                SERIAL PRIMARY KEY,
     is_available      BOOLEAN NOT NULL,
     catalog_record_id INTEGER NOT NULL,
-    storage_user_id   INTEGER
+    catalog_user_id   INTEGER
 );
 
 alter table catalog_user
@@ -51,5 +51,5 @@ alter table catalog_with_storage_record
         foreign key (catalog_record_id) references catalog_record;
 
 alter table catalog_with_storage_record
-    add constraint fk_catalog_with_storage_record_storage_user_id
-        foreign key (storage_user_id) references storage_user;
+    add constraint fk_catalog_with_storage_record_catalog_user_id
+        foreign key (catalog_user_id) references catalog_user;

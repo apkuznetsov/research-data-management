@@ -1,6 +1,6 @@
 package ddss.catalog.security;
 
-import ddss.catalog.data.DeviceUserRepository;
+import ddss.catalog.data.CatalogUserRepository;
 import ddss.catalog.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class RegistrationController {
 
     @Autowired
-    private DeviceUserRepository userRepo;
+    private CatalogUserRepository userRepo;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

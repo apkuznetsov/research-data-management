@@ -1,6 +1,6 @@
 package ddss.catalog.security;
 
-import ddss.catalog.data.DeviceUserRepository;
+import ddss.catalog.data.CatalogUserRepository;
 import ddss.catalog.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class CatalogUserService implements UserDetailsService {
 
     @Autowired
-    private DeviceUserRepository repo;
+    private CatalogUserRepository repo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

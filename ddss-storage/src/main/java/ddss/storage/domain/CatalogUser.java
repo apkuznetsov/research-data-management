@@ -1,6 +1,8 @@
 package ddss.storage.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "catalog_user")
+@Getter
+@Setter
 public class CatalogUser implements UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -35,30 +39,6 @@ public class CatalogUser implements UserDetails {
     public CatalogUser(String username, String passwordEncoded, String about) {
         this.username = username;
         this.password = passwordEncoded;
-        this.about = about;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
         this.about = about;
     }
 

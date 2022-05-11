@@ -26,6 +26,10 @@ public class CatalogUser implements UserDetails {
     private String password;
     @Column(name = "about")
     private String about;
+    @Column(name = "ip_address", nullable = false)
+    private String ipAddress;
+    @Column(name = "port", nullable = false)
+    private short port;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalogUser")
     @ToString.Exclude

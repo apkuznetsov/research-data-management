@@ -1,7 +1,7 @@
-package ddss.catalog.security;
+package ddss.storage.security;
 
-import ddss.catalog.data.DeviceUserRepository;
-import ddss.catalog.domain.CatalogUser;
+import ddss.storage.data.DeviceUserRepository;
+import ddss.storage.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Component
 @Service
-public class DeviceUserService implements UserDetailsService {
+public class CatalogUserService implements UserDetailsService {
 
     @Autowired
     private DeviceUserRepository repo;

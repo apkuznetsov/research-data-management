@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private DeviceUserService deviceUserService;
+    private CatalogUserService catalogUserService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(deviceUserService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(catalogUserService).passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Override

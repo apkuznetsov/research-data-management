@@ -27,9 +27,7 @@ public class StorageUser {
     private String ipAddress;
     @Column(name = "port", nullable = false)
     private short port;
-    @Column(name = "available_megabytes_number", nullable = false)
-    private long availableMegabytesNumber;
-
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "storageUser")
     @ToString.Exclude
     @JsonIgnore

@@ -32,6 +32,8 @@ public class CatalogUser implements UserDetails {
     private String ipAddress;
     @Column(name = "port", nullable = false)
     private short port;
+    @Column(name = "is_storage", nullable = false)
+    private boolean isStorage;
 
     public CatalogUser() {
     }

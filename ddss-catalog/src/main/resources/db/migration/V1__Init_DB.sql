@@ -1,11 +1,12 @@
 CREATE TABLE IF NOT EXISTS catalog_user
 (
-    id         SERIAL PRIMARY KEY,
-    username   VARCHAR(64) NOT NULL,
-    password   VARCHAR(64) NOT NULL,
-    about      VARCHAR(256),
-    ip_address VARCHAR(15) NOT NULL,
-    port       SMALLINT
+    id          SERIAL PRIMARY KEY,
+    username    VARCHAR(64) NOT NULL,
+    password    VARCHAR(64) NOT NULL,
+    about       VARCHAR(256),
+    ip_address  VARCHAR(15) NOT NULL,
+    port        SMALLINT,
+    is_storage  BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS catalog_record

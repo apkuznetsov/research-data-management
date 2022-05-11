@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS catalog_user
     password    VARCHAR(64) NOT NULL,
     about       VARCHAR(256),
     ip_address  VARCHAR(15) NOT NULL,
-    port        SMALLINT
+    port        SMALLINT,
+    is_storage  BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS deposit

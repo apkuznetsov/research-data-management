@@ -23,9 +23,11 @@ public class RegistrationIntegrationTests extends IntegrationTests {
     @BeforeEach
     public void init() {
         regFormAlreadyCreatedUser =
-                new RegistrationForm(tprops.getUsername(), tprops.getPassword(), tprops.getAbout());
+                new RegistrationForm(tprops.getUsername(), tprops.getPassword(), tprops.getAbout(),
+                        tprops.getIpAddress(), tprops.getPort(), tprops.isStorage());
         regFormNewUser =
-                new RegistrationForm(tprops.getUsername2(), tprops.getUsername2(), tprops.getAbout2());
+                new RegistrationForm(tprops.getUsername2(), tprops.getUsername2(), tprops.getAbout2(),
+                        tprops.getIpAddress2(), tprops.getPort2(), tprops.isStorage2());
     }
 
     @Test

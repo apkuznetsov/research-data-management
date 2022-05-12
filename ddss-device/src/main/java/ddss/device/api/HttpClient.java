@@ -1,10 +1,13 @@
 package ddss.device.api;
 
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,5 +25,15 @@ public class HttpClient {
 
         httpClient = new RestTemplate();
         httpClient.setMessageConverters(messageConverters);
+    }
+
+    public static HttpHeaders createHeaders(String username, String password) {
+        return new HttpHeaders() {{
+            String auth = username + ":" + password;
+            byte[] encodedAuth = Base64.encodeBase64(
+                    auth.getBytes(StandardCharsets.US_ASCII));
+            String authHeader = "Basic " + new String(encodedAuth);
+            set("Authorization", authHeader);
+        }};
     }
 }

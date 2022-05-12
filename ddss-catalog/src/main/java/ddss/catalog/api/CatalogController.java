@@ -21,7 +21,7 @@ public class CatalogController {
     private CatalogRecordRepository catalogRepo;
 
     @PostMapping(value = "/record/create", consumes = "application/json")
-    public ResponseEntity<CatalogRecord> createCreate(
+    public ResponseEntity<CatalogRecord> createRecord(
             @Valid @RequestBody CatalogRecord record, @AuthenticationPrincipal CatalogUser user) {
 
         record.setUser(user);

@@ -1,10 +1,11 @@
 package ddss.device;
 
+import ddss.device.domain.CatalogRecord;
+
 import java.util.Scanner;
 
 import static ddss.device.DdssDeviceProps.*;
-import static ddss.device.api.CatalogInteractionController.createRecord;
-import static ddss.device.api.CatalogInteractionController.register;
+import static ddss.device.api.CatalogInteractionController.*;
 
 public class DdssDeviceMenu {
 
@@ -65,7 +66,7 @@ public class DdssDeviceMenu {
 
     private static void menuCreateRec() {
         System.out.println("Введите:");
-        System.out.print("О записи ............ ");
+        System.out.print("Описание ............ ");
         String newAbout = in.nextLine();
         System.out.println();
 
@@ -74,6 +75,17 @@ public class DdssDeviceMenu {
         if (catalogRecordId >= 0) {
             System.out.println("ЗАПИСЬ СОЗДАНА, ЕЁ ID = " + catalogRecordId);
             System.out.println();
+
+            menuGetRecById();
         }
+    }
+
+    private static void menuGetRecById() {
+        CatalogRecord catalogRecord = getRecordById(catalogRecordId, username, password);
+        System.out.println("Номер ...... " + catalogRecord.getId());
+        System.out.println("Описание ... " + catalogRecord.getAbout());
+        System.out.println("Схема ...... " + catalogRecord.getProtoScheme());
+        System.out.println("Создан ..... " + catalogRecord.getCreatedAt());
+        System.out.println();
     }
 }

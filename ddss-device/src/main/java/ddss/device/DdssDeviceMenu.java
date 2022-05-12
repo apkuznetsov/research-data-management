@@ -26,6 +26,7 @@ public class DdssDeviceMenu {
                     "0 -- Выйти\n" +
                     "Выбор ... ");
             m = in.nextLine();
+            System.out.println();
 
             switch (m) {
                 case "1":
@@ -46,10 +47,11 @@ public class DdssDeviceMenu {
 
     private static void menuReg() {
         System.out.println("Введите:");
-        System.out.println("Логин ............... ");
+        System.out.print("Логин ............... ");
         String newUsername = in.nextLine();
-        System.out.println("Пароль .............. ");
+        System.out.print("Пароль .............. ");
         String newPassword = in.nextLine();
+        System.out.println();
 
         if (register(newUsername, newPassword, "new user",
                 IP_ADDRESS, PORT, false)) {
@@ -63,8 +65,9 @@ public class DdssDeviceMenu {
 
     private static void menuCreateRec() {
         System.out.println("Введите:");
-        System.out.println("О записи ............ ");
+        System.out.print("О записи ............ ");
         String newAbout = in.nextLine();
+        System.out.println();
 
         catalogRecordId = -1;
         catalogRecordId = createRecord(newAbout, PROTO_SCHEME, username, password);

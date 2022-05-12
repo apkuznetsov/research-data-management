@@ -9,8 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
 
-import static ddss.device.DdssDeviceProps.CAT_CREATE_URL;
-import static ddss.device.DdssDeviceProps.CAT_REG_URL;
+import static ddss.device.DdssDeviceProps.*;
 import static ddss.device.api.HttpClient.createHeaders;
 import static ddss.device.api.HttpClient.httpClient;
 
@@ -37,5 +36,15 @@ public class CatalogInteractionController {
                 .exchange(CAT_CREATE_URL, HttpMethod.POST, request, CatalogRecord.class);
 
         return Objects.requireNonNull(response.getBody()).getId();
+    }
+
+    public static CatalogRecord getRecordById(int id,
+                                              String username, String password) {
+
+        HttpEntity<CatalogRecord> request = new HttpEntity<>(new CatalogRecord(), createHeaders(username, password));
+        ResponseEntity<CatalogRecord> response = httpClient
+                .exchange(CAT_RECORD_URL + "/" + id, HttpMethod.GET, request, CatalogRecord.class);
+
+        return response.getBody();
     }
 }

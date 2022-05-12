@@ -5,6 +5,7 @@ public class DdssDeviceProps {
     public static final String CAT_URL = "http://localhost:8080";
     public static final String CAT_REG_URL = CAT_URL + "/cat/register";
     public static final String CAT_CREATE_URL = CAT_URL + "/cat/record/create";
+    public static final String CAT_RECORD_URL = CAT_URL + "/cat/record";
 
     public static final String USERNAME = "example";
     public static final String PASSWORD = "qwerty";

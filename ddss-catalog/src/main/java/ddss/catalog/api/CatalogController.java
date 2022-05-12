@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/cat")
@@ -20,12 +21,12 @@ public class CatalogController {
     private CatalogRecordRepository catalogRepo;
 
     @PostMapping(value = "/record/create", consumes = "application/json")
-    public ResponseEntity<CatalogRecord> createCreate(
+    public ResponseEntity<CatalogRecord> createRecord(
             @Valid @RequestBody CatalogRecord record, @AuthenticationPrincipal CatalogUser user) {
 
         record.setUser(user);
-        catalogRepo.save(record);
-        return new ResponseEntity<>(record, HttpStatus.CREATED);
+        record.setCreatedAt(LocalDateTime.now());
+        return new ResponseEntity<>(catalogRepo.save(record), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/record/{id}")

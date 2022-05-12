@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import static ddss.device.DdssDeviceProps.CAT_CREATE_URL;
 import static ddss.device.DdssDeviceProps.CAT_REG_URL;
+import static ddss.device.api.HttpClient.createHeaders;
 import static ddss.device.api.HttpClient.httpClient;
 
 public class CatalogInteractionController {
@@ -31,9 +32,8 @@ public class CatalogInteractionController {
                                    String username, String password) {
 
         CatalogRecord catRec = new CatalogRecord(about, protoScheme);
-        HttpEntity<CatalogRecord> request = new HttpEntity<>(catRec);
+        HttpEntity<CatalogRecord> request = new HttpEntity<>(catRec, createHeaders(username, password));
         ResponseEntity<CatalogRecord> response = httpClient
-                .withBasicAuth(username, password)
                 .exchange(CAT_CREATE_URL, HttpMethod.POST, request, CatalogRecord.class);
 
         return Objects.requireNonNull(response.getBody()).getId();

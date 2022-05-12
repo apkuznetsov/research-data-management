@@ -14,13 +14,13 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @Controller
-@RequestMapping("/cat")
+@RequestMapping("/cat/record")
 public class CatalogController {
 
     @Autowired
     private CatalogRecordRepository catalogRepo;
 
-    @PostMapping(value = "/record/create", consumes = "application/json")
+    @PostMapping(value = "/create", consumes = "application/json")
     public ResponseEntity<CatalogRecord> createRecord(
             @Valid @RequestBody CatalogRecord record, @AuthenticationPrincipal CatalogUser user) {
 
@@ -29,7 +29,7 @@ public class CatalogController {
         return new ResponseEntity<>(catalogRepo.save(record), HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/record/{id}")
+    @GetMapping(path = "/{id}")
     public ResponseEntity<CatalogRecord> getRecordById(
             @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
@@ -39,7 +39,7 @@ public class CatalogController {
                 : new ResponseEntity<>(record, HttpStatus.OK);
     }
 
-    @DeleteMapping("/record/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteRecordById(
             @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 

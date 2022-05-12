@@ -17,15 +17,18 @@ public class CatalogRecord {
     public CatalogRecord() {
     }
 
-    public CatalogRecord(String about, String protoScheme, LocalDateTime createdAt) {
+    public CatalogRecord(String about, String protoScheme) {
         this.about = about;
         this.protoScheme = protoScheme;
+    }
+
+    public CatalogRecord(String about, String protoScheme, LocalDateTime createdAt) {
+        this(about, protoScheme);
         this.createdAt = createdAt;
     }
 
     public CatalogRecord(String about, String protoScheme, String createdAt) {
-        this.about = about;
-        this.protoScheme = protoScheme;
+        this(about, protoScheme);
         this.createdAt = LocalDateTime.parse(createdAt);
     }
 

@@ -1,0 +1,20 @@
+version: '2.2'
+
+services:
+  app:
+    image: 'ddss-catalog:latest'
+    build:
+      context: .
+    container_name: ddss-catalog-app
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    env_file:
+      - vars-spring.env
+          
+  db:
+    image: 'postgres:14.2-alpine'
+    container_name: db
+    env_file:
+      - vars-postgres.env

@@ -1,5 +1,6 @@
 package ddss.storage.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,7 @@ public class CatalogUser implements UserDetails {
     private String username;
     @Column(name = "password", nullable = false)
     @Length(min = 5, max = 64)
+    @JsonIgnore
     private String password;
     @Column(name = "about")
     @Length(max = 256)

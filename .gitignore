@@ -36,3 +36,5 @@ build/
 
 ddss-device/src/main/protoc.exe
 ddss-storage/src/test/protoc.exe
+
+docker/ddss-storage/ddss-storage-0.0.1.jar

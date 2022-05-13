@@ -8,13 +8,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.7</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <packaging>jar</packaging>
     <groupId>ssau.kuznetsov</groupId>
     <artifactId>ddss-catalog</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>ddss-catalog</name>
     <description>ddss-catalog</description>
 

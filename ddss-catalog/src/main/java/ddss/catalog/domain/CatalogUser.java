@@ -103,6 +103,6 @@ public class CatalogUser implements UserDetails {
     }
 
     public String toString() {
-        return "https://" + ipAddress + ":" + port;
+        return "http://" + ipAddress + ":" + port;
     }
 }

@@ -39,3 +39,4 @@ ddss-storage/src/test/protoc.exe
 
 docker/ddss-catalog/ddss-catalog-0.0.1.jar
 docker/ddss-storage/ddss-storage-0.0.1.jar
+docker/ddss-device/ddss-device-0.0.1.jar

@@ -16,4 +16,10 @@ public class DdssCatalogProps {
     private String adminUsername;
     @Value("${ddss.admin.password}")
     private String adminPassword;
+
+    @Value("${ddss.url.storage.available_megabytes}")
+    private String availableMegabytesUrl;
+
+    @Value("${ddss.storage.min_available_megabytes}")
+    private long minAvailableMegabytes;
 }

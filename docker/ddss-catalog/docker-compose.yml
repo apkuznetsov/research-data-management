@@ -17,5 +17,8 @@ services:
   db:
     image: 'postgres:14.2-alpine'
     container_name: ddss-catalog-db
+    ports:
+      - '5432:5432'
+    command: -p 5432
     env_file:
       - vars-postgres.env

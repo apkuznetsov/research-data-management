@@ -101,4 +101,8 @@ public class CatalogUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String toString() {
+        return "http://" + ipAddress + ":" + port;
+    }
 }

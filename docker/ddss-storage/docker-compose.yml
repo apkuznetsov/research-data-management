@@ -10,6 +10,7 @@ services:
       - 8081:8081
     depends_on:
       - db
+    command: sh -c './wait-for host:5432'
     env_file:
       - vars-spring.env
           

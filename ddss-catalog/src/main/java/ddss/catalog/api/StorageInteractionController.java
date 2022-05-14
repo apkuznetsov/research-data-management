@@ -21,25 +21,30 @@ import static ddss.catalog.api.HttpClient.createHeaders;
 @RequestMapping("/cat/storage")
 public class StorageInteractionController {
 
-    @Autowired
-    private DdssCatalogProps props;
+    private final DdssCatalogProps props;
+    private final CatalogUserRepository userRepo;
 
-    private final HttpHeaders headers =
-            createHeaders(props.getAdminPassword(), props.getAdminPassword());
-    private final HttpEntity<AvailableMegabytesNumber> request
-            = new HttpEntity<>(new AvailableMegabytesNumber(), headers);
+    private final HttpEntity<AvailableMegabytesNumber> request;
+
     @Autowired
-    private CatalogUserRepository userRepo;
+    public StorageInteractionController(DdssCatalogProps props, CatalogUserRepository userRepo) {
+        this.props = props;
+        this.userRepo = userRepo;
+
+        HttpHeaders headers = createHeaders(props.getAdminUsername(), props.getAdminPassword());
+        request = new HttpEntity<>(new AvailableMegabytesNumber(), headers);
+    }
 
     @GetMapping(path = "/available")
     public ResponseEntity<CatalogStorage> getAvailableStorage(@AuthenticationPrincipal CatalogUser user) {
 
         List<CatalogUser> storageUsers = userRepo.findAllByIsStorage(true);
 
-        AvailableMegabytesNumber result = null;
+        AvailableMegabytesNumber result;
         for (CatalogUser storageUser : storageUsers) {
+
             ResponseEntity<AvailableMegabytesNumber> response = client
-                    .exchange(storageUser.toString() + props.getAvailableMegabytesUrl(),
+                    .exchange(storageUser + props.getAvailableMegabytesUrl(),
                             HttpMethod.GET, request, AvailableMegabytesNumber.class);
             result = response.getBody();
             if (result == null) {

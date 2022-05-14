@@ -6,6 +6,8 @@ services:
     build:
       context: .
     container_name: ddss-storage-app
+    networks:
+      - my-network
     ports:
       - "8081:8081"
     depends_on:
@@ -17,8 +19,14 @@ services:
   db:
     image: 'postgres:14.2-alpine'
     container_name: ddss-storage-db
+    networks:
+      - my-network
     ports:
       - "5433:5433"
     command: -p 5433
     env_file:
       - vars-postgres.env
+
+networks:
+  my-network:
+    external: true

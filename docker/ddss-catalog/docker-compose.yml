@@ -6,6 +6,8 @@ services:
     build:
       context: .
     container_name: ddss-catalog-app
+    networks:
+      - my-network
     ports:
       - 8080:8080
     depends_on:
@@ -17,5 +19,11 @@ services:
   db:
     image: 'postgres:14.2-alpine'
     container_name: ddss-catalog-db
+    networks:
+      - my-network
     env_file:
       - vars-postgres.env
+
+networks:
+  my-network:
+    external: true

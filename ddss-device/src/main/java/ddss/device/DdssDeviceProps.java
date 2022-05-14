@@ -8,7 +8,7 @@ public class DdssDeviceProps {
     public static final String CAT_RECORD_URL = CAT_URL + "/cat/record";
     public static final String CAT_AVAILABLE_STORAGE_URL = CAT_URL + "/cat/storage/available";
 
-    public static final String USERNAME = "example";
+    public static final String USERNAME = "admin";
     public static final String PASSWORD = "qwerty";
     public static final String IP_ADDRESS = "127.0.0.1";
     public static final short PORT = 2048;

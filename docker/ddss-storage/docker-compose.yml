@@ -9,7 +9,7 @@ services:
     networks:
       - my-network
     ports:
-      - "8081:8081"
+      - '8081:8081'
     depends_on:
       - db
     command: sh -c './wait-for host:5433'
@@ -22,7 +22,7 @@ services:
     networks:
       - my-network
     ports:
-      - "5433:5433"
+      - '5433:5433'
     command: -p 5433
     env_file:
       - vars-postgres.env

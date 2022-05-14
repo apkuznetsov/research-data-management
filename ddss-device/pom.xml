@@ -75,10 +75,7 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <enableAssertions>false</enableAssertions>
                     <ignoreNonCompile>true</ignoreNonCompile>
-                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
-                    <useIncrementalCompilation>false</useIncrementalCompilation>
                 </configuration>
             </plugin>
             <plugin>

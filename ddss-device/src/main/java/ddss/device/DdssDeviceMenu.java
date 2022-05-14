@@ -1,6 +1,7 @@
 package ddss.device;
 
 import ddss.device.domain.CatalogRecord;
+import ddss.device.domain.CatalogStorage;
 
 import java.util.Scanner;
 
@@ -24,6 +25,7 @@ public class DdssDeviceMenu {
         do {
             System.out.print("1 -- Зарегистрироваться\n" +
                     "2 -- Создать запись в Каталоге\n" +
+                    "3 -- Получить адрес доступного Хранилища\n" +
                     "0 -- Выйти\n" +
                     "Выбор ... ");
             m = in.nextLine();
@@ -33,11 +35,12 @@ public class DdssDeviceMenu {
                 case "1":
                     menuReg();
                     break;
-
                 case "2":
                     menuCreateRec();
                     break;
-
+                case "3":
+                    menuGetAvailableStorage();
+                    break;
                 default:
                     break;
             }
@@ -86,6 +89,15 @@ public class DdssDeviceMenu {
         System.out.println("Описание ... " + catalogRecord.getAbout());
         System.out.println("Схема ...... " + catalogRecord.getProtoScheme());
         System.out.println("Создан ..... " + catalogRecord.getCreatedAt());
+        System.out.println();
+    }
+
+    private static void menuGetAvailableStorage() {
+        CatalogStorage availableStorage = getAvailableStorage(username, password);
+        System.out.println("Номер ....... " + availableStorage.getId());
+        System.out.println("Описание .... " + availableStorage.getAbout());
+        System.out.println("IP-адресс ... " + availableStorage.getIpAddress());
+        System.out.println("Порт ........ " + availableStorage.getPort());
         System.out.println();
     }
 }

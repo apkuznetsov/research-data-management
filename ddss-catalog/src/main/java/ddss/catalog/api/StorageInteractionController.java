@@ -25,7 +25,7 @@ public class StorageInteractionController {
     private final DdssCatalogProps props;
     private final CatalogUserRepository userRepo;
     private final CatalogRecordRepository recordRepo;
-    private final CatalogWithStorageRecordRepository recordWithStorageRepo;
+    private final CatalogWithStorageRecordRepository withStorageRecordRepo;
 
     private final HttpEntity<AvailableMegabytesNumber> request;
 
@@ -33,12 +33,12 @@ public class StorageInteractionController {
     public StorageInteractionController(DdssCatalogProps props,
                                         CatalogUserRepository userRepo,
                                         CatalogRecordRepository recordRepo,
-                                        CatalogWithStorageRecordRepository recordWithStorageRepo) {
+                                        CatalogWithStorageRecordRepository withStorageRecordRepo) {
 
         this.props = props;
         this.userRepo = userRepo;
         this.recordRepo = recordRepo;
-        this.recordWithStorageRepo = recordWithStorageRepo;
+        this.withStorageRecordRepo = withStorageRecordRepo;
 
         HttpHeaders headers = createHeaders(props.getAdminUsername(), props.getAdminPassword());
         request = new HttpEntity<>(new AvailableMegabytesNumber(), headers);
@@ -49,25 +49,32 @@ public class StorageInteractionController {
             @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
         List<CatalogUser> storageUsers = userRepo.findAllByIsStorage(true);
-        ResponseEntity<CatalogStorage> availableStorage = findAvailableStorage(storageUsers);
+        ResponseEntity<CatalogUser> availableStorageUserResponse = findAvailableStorage(storageUsers);
 
-        if (availableStorage.getStatusCode() == HttpStatus.OK) {
+        if (availableStorageUserResponse.getStatusCode() == HttpStatus.OK) {
             CatalogRecord recordWithSuchId = recordRepo.findById(id).orElse(null);
             if (recordWithSuchId == null) {
                 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
 
             CatalogWithStorageRecord recordWithStorage = new CatalogWithStorageRecord(true);
-            recordWithStorage.setCatalogUser(user);
+            recordWithStorage.setCatalogUser(availableStorageUserResponse.getBody());
             recordWithStorage.setCatalogRecord(recordWithSuchId);
 
-            recordWithStorageRepo.save(recordWithStorage);
+            withStorageRecordRepo.save(recordWithStorage);
         }
 
-        return availableStorage;
+        CatalogUser availableStorageUser = availableStorageUserResponse.getBody();
+        CatalogStorage availableStorage = null;
+        if (availableStorageUser != null) {
+            availableStorage = new CatalogStorage(availableStorageUser.getId(), availableStorageUser.getAbout(),
+                    availableStorageUser.getIpAddress(), availableStorageUser.getPort());
+        }
+
+        return new ResponseEntity<>(availableStorage, availableStorageUserResponse.getStatusCode());
     }
 
-    private ResponseEntity<CatalogStorage> findAvailableStorage(List<CatalogUser> storageUsers) {
+    private ResponseEntity<CatalogUser> findAvailableStorage(List<CatalogUser> storageUsers) {
         AvailableMegabytesNumber result;
         for (CatalogUser storageUser : storageUsers) {
 
@@ -80,13 +87,33 @@ public class StorageInteractionController {
             }
 
             if (result.getValue() >= props.getMinAvailableMegabytes()) {
-                return new ResponseEntity<>(
-                        new CatalogStorage(storageUser.getId(), storageUser.getAbout(),
-                                storageUser.getIpAddress(), storageUser.getPort()),
-                        HttpStatus.OK);
+                return new ResponseEntity<>(storageUser, HttpStatus.OK);
             }
         }
 
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(path = "/record/{id}")
+    public ResponseEntity<CatalogStorage> getStorageByCatalogRecordId(
+            @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
+
+        CatalogWithStorageRecord withStorageRecord = withStorageRecordRepo
+                .findByCatalogRecordId(id);
+        if (withStorageRecord == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        CatalogUser storage = userRepo
+                .findById(withStorageRecord.getCatalogUser().getId())
+                .orElse(null);
+        if (storage == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(
+                new CatalogStorage(storage.getId(), storage.getAbout(),
+                        storage.getIpAddress(), storage.getPort()),
+                HttpStatus.OK);
     }
 }

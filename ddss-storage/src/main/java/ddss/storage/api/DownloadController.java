@@ -23,11 +23,11 @@ public class DownloadController {
     @Autowired
     DepositRepository depositRepo;
 
-    @GetMapping(value = "/download/{catalogRecordId}", consumes = "application/json")
-    public ResponseEntity<Data> download(
-            @PathVariable int catalogRecordId, @AuthenticationPrincipal CatalogUser user) {
+    @GetMapping(value = "/download/{id}", consumes = "application/json")
+    public ResponseEntity<Data> downloadByCatalogRecordId(
+            @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
-        Deposit deposit = depositRepo.findByCatalogRecordId(catalogRecordId);
+        Deposit deposit = depositRepo.findByCatalogRecordId(id);
 
         if (deposit != null) {
             Data data = new Data(deposit.getData());
@@ -37,11 +37,11 @@ public class DownloadController {
         }
     }
 
-    @GetMapping(value = "/download/all/{catalogRecordId}", consumes = "application/json")
-    public ResponseEntity<List<Data>> downloadAll(
-            @PathVariable int catalogRecordId, @AuthenticationPrincipal CatalogUser user) {
+    @GetMapping(value = "/download/all/{id}", consumes = "application/json")
+    public ResponseEntity<List<Data>> downloadAllByCatalogRecordId(
+            @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
-        List<Deposit> depositList = depositRepo.findAllByCatalogRecordId(catalogRecordId);
+        List<Deposit> depositList = depositRepo.findAllByCatalogRecordId(id);
 
         if (!depositList.isEmpty()) {
             List<Data> dataList = depositList.stream()

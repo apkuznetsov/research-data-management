@@ -11,7 +11,7 @@ import static ddss.device.api.StorageInteractionController.upload;
 
 public class DdssDeviceMenu {
 
-    private static String storageIpAddressWithPort = "";
+    private static String storageToUploadAddress = "";
     private static Integer catalogRecordId = null;
 
     private static String username = DdssDeviceProps.USERNAME;
@@ -26,8 +26,8 @@ public class DdssDeviceMenu {
         do {
             System.out.print("1 -- Зарегистрироваться\n" +
                     "2 -- Создать запись в Каталоге (ид текущей записи = " + catalogRecordId + ")\n" +
-                    "3 -- Получить адрес доступного Хранилища (адрес Хранилища = " + storageIpAddressWithPort + ")\n" +
-                    "4 -- Отправить в Хранилище тестовые данные (адрес Хранилища = " + storageIpAddressWithPort + ")\n" +
+                    "3 -- Получить адрес доступного Хранилища (адрес Хранилища = " + storageToUploadAddress + ")\n" +
+                    "4 -- Отправить в Хранилище тестовые данные (адрес Хранилища = " + storageToUploadAddress + ")\n" +
                     "5 -- Получить адрес Хранилища c Записью=" + catalogRecordId + ")\n" +
                     "0 -- Выйти\n" +
                     "Выбор ... ");
@@ -107,7 +107,7 @@ public class DdssDeviceMenu {
     }
 
     private static void menuUploadData() {
-        if (upload(storageIpAddressWithPort, catalogRecordId, username, password)) {
+        if (upload(storageToUploadAddress, catalogRecordId, username, password)) {
             System.out.println("ДАННЫЕ СОХРАНЕНЫ");
         } else {
             System.out.println("ДАННЫЕ НЕ СОХРАНЕНЫ");
@@ -121,7 +121,7 @@ public class DdssDeviceMenu {
     }
 
     private static void print(CatalogStorage storage) {
-        storageIpAddressWithPort = storage.toString();
+        storageToUploadAddress = storage.toString();
 
         System.out.println("Номер ....... " + storage.getId());
         System.out.println("Описание .... " + storage.getAbout());

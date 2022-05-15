@@ -102,8 +102,9 @@ public class DdssDeviceMenu {
     }
 
     private static void menuGetAvailableStorage() {
-        CatalogStorage availableStorage = getAvailableStorage(catalogRecordId, username, password);
-        print(availableStorage);
+        CatalogStorage storageToUpload = getAvailableStorage(catalogRecordId, username, password);
+        storageToUploadAddress = storageToUpload.toString();
+        print(storageToUpload);
     }
 
     private static void menuUploadData() {
@@ -121,8 +122,6 @@ public class DdssDeviceMenu {
     }
 
     private static void print(CatalogStorage storage) {
-        storageToUploadAddress = storage.toString();
-
         System.out.println("Номер ....... " + storage.getId());
         System.out.println("Описание .... " + storage.getAbout());
         System.out.println("IP-адресс ... " + storage.getIpAddress());

@@ -28,6 +28,7 @@ public class DdssDeviceMenu {
                     "2 -- Создать запись в Каталоге (ид текущей записи = " + catalogRecordId + ")\n" +
                     "3 -- Получить адрес доступного Хранилища (адрес Хранилища = " + storageIpAddressWithPort + ")\n" +
                     "4 -- Отправить в Хранилище тестовые данные (адрес Хранилища = " + storageIpAddressWithPort + ")\n" +
+                    "5 -- Получить адрес Хранилища c Записью=" + catalogRecordId + ")\n" +
                     "0 -- Выйти\n" +
                     "Выбор ... ");
             m = in.nextLine();
@@ -44,6 +45,9 @@ public class DdssDeviceMenu {
                     menuGetAvailableStorage();
                     break;
                 case "4":
+                    menuUploadData();
+                    break;
+                case "5":
                     menuUploadData();
                     break;
                 default:
@@ -99,13 +103,7 @@ public class DdssDeviceMenu {
 
     private static void menuGetAvailableStorage() {
         CatalogStorage availableStorage = getAvailableStorage(catalogRecordId, username, password);
-        storageIpAddressWithPort = availableStorage.toString();
-
-        System.out.println("Номер ....... " + availableStorage.getId());
-        System.out.println("Описание .... " + availableStorage.getAbout());
-        System.out.println("IP-адресс ... " + availableStorage.getIpAddress());
-        System.out.println("Порт ........ " + availableStorage.getPort());
-        System.out.println();
+        print(availableStorage);
     }
 
     private static void menuUploadData() {
@@ -114,6 +112,21 @@ public class DdssDeviceMenu {
         } else {
             System.out.println("ДАННЫЕ НЕ СОХРАНЕНЫ");
         }
+        System.out.println();
+    }
+
+    private static void menuGetStorageToDownload() {
+        CatalogStorage storageToDownload = getStorageToDownload(catalogRecordId, username, password);
+        print(storageToDownload);
+    }
+
+    private static void print(CatalogStorage storage) {
+        storageIpAddressWithPort = storage.toString();
+
+        System.out.println("Номер ....... " + storage.getId());
+        System.out.println("Описание .... " + storage.getAbout());
+        System.out.println("IP-адресс ... " + storage.getIpAddress());
+        System.out.println("Порт ........ " + storage.getPort());
         System.out.println();
     }
 }

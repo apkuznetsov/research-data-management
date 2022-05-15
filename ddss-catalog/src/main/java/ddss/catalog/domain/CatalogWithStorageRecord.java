@@ -27,4 +27,8 @@ public class CatalogWithStorageRecord {
 
     public CatalogWithStorageRecord() {
     }
+
+    public CatalogWithStorageRecord(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
 }

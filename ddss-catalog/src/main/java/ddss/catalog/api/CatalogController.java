@@ -26,7 +26,9 @@ public class CatalogController {
 
         record.setUser(user);
         record.setCreatedAt(LocalDateTime.now());
-        return new ResponseEntity<>(catalogRepo.save(record), HttpStatus.CREATED);
+        
+        CatalogRecord savedRecord = catalogRepo.save(record);
+        return new ResponseEntity<>(savedRecord, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")

@@ -78,7 +78,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
 
     @Test
     @FlywayTest
-    public void delete_record_with_status_no_content() {
+    public void delete_record_with_status_forbidden() {
         // arrange
         String testUrl = tprops.getUrlRecord() + "/" + tprops.getRecId();
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
@@ -89,12 +89,12 @@ public class CatalogIntegrationTests extends IntegrationTests {
                 .exchange(testUrl, HttpMethod.DELETE, request, CatalogRecord.class);
 
         // assert
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }
 
     @Test
     @FlywayTest
-    public void delete_record_with_status_forbidden() {
+    public void delete_record_with_status_no_content() {
         // arrange
         String testUrl = tprops.getUrlRecord() + "/" + tprops.getRecIdForForbidden();
         HttpEntity<String> request = new HttpEntity<>(null, new HttpHeaders());
@@ -105,7 +105,7 @@ public class CatalogIntegrationTests extends IntegrationTests {
                 .exchange(testUrl, HttpMethod.DELETE, request, CatalogRecord.class);
 
         // assert
-        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
     @Test

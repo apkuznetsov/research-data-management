@@ -76,10 +76,10 @@ public class StorageInteractionController {
 
     private ResponseEntity<CatalogUser> findAvailableStorage(List<CatalogUser> storageUsers) {
         AvailableMegabytesNumber result;
-        for (CatalogUser storageUser : storageUsers) {
+        for (CatalogUser storage : storageUsers) {
 
             ResponseEntity<AvailableMegabytesNumber> response = client
-                    .exchange(storageUser + props.getAvailableMegabytesUrl(),
+                    .exchange(storage + props.getAvailableMegabytesUrl(),
                             HttpMethod.GET, request, AvailableMegabytesNumber.class);
             result = response.getBody();
             if (result == null) {
@@ -87,7 +87,7 @@ public class StorageInteractionController {
             }
 
             if (result.getValue() >= props.getMinAvailableMegabytes()) {
-                return new ResponseEntity<>(storageUser, HttpStatus.OK);
+                return new ResponseEntity<>(storage, HttpStatus.OK);
             }
         }
 

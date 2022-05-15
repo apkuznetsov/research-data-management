@@ -11,7 +11,7 @@ import static ddss.device.api.CatalogInteractionController.*;
 public class DdssDeviceMenu {
 
     private static final String storageIpAddressWithPort = "";
-    private static int catalogRecordId = -1;
+    private static Integer catalogRecordId = null;
 
     private static String username = DdssDeviceProps.USERNAME;
     private static String password = DdssDeviceProps.PASSWORD;
@@ -24,8 +24,9 @@ public class DdssDeviceMenu {
 
         do {
             System.out.print("1 -- Зарегистрироваться\n" +
-                    "2 -- Создать запись в Каталоге\n" +
-                    "3 -- Получить адрес доступного Хранилища\n" +
+                    "2 -- Создать запись в Каталоге (ид текущей записи = " + catalogRecordId + ")\n" +
+                    "3 -- Получить адрес доступного Хранилища (адрес Хранилища = " + storageIpAddressWithPort + ")\n" +
+                    "4 -- Отправить в Хранилище тестовые данные (адрес Хранилища = " + storageIpAddressWithPort + ")\n" +
                     "0 -- Выйти\n" +
                     "Выбор ... ");
             m = in.nextLine();

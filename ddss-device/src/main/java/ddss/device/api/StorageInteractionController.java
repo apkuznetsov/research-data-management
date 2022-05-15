@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static ddss.device.DdssDeviceProps.STORAGE_DOWNLOAD_ALL_URL;
@@ -37,11 +38,11 @@ public class StorageInteractionController {
 
     public static boolean downloadAll(String ipAddressWithPort, int catalogRecordId, String username, String password) {
 
-        HttpEntity<String> request = new HttpEntity<>(null, createHeaders(username, password));
+        HttpEntity<List<Data>> request = new HttpEntity<>(new ArrayList<Data>(), createHeaders(username, password));
 
         ResponseEntity<List<Data>> response = httpClient
                 .exchange("http://" + ipAddressWithPort + STORAGE_DOWNLOAD_ALL_URL + "/" + catalogRecordId,
-                        HttpMethod.GET, request, new ParameterizedTypeReference<>() {
+                        HttpMethod.GET, request, new ParameterizedTypeReference<List<Data>>() {
                         });
 
         return response.getStatusCode() == HttpStatus.OK;

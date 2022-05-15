@@ -89,4 +89,28 @@ public class StorageInteractionController {
 
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping(path = "/record/{id}")
+    public ResponseEntity<CatalogStorage> getStorageByCatalogRecordId(
+            @PathVariable int catalogRecordId, @AuthenticationPrincipal CatalogUser user) {
+
+        CatalogWithStorageRecord withStorageRecord = withStorageRecordRepo
+                .findByCatalogRecordId(catalogRecordId);
+        if (withStorageRecord == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        CatalogUser storage = userRepo
+                .findById(withStorageRecord.getCatalogUser().getId())
+                .orElse(null);
+        if (storage == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(
+                new CatalogStorage(storage.getId(), storage.getAbout(),
+                        storage.getIpAddress(), storage.getPort()),
+                HttpStatus.OK);
+    }
+
 }

@@ -2,7 +2,9 @@ package ddss.device;
 
 import ddss.device.domain.CatalogRecord;
 import ddss.device.domain.CatalogStorage;
+import ddss.device.domain.Data;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static ddss.device.DdssDeviceProps.*;
@@ -129,8 +131,12 @@ public class DdssDeviceMenu {
     }
 
     private static void menuDownloadAllData() {
-        if (downloadAll(storageToDownloadAddress, catalogRecordId, username, password)) {
+        List<Data> dataList = downloadAll(storageToDownloadAddress, catalogRecordId, username, password);
+        if (dataList != null) {
             System.out.println("ДАННЫЕ СКАЧАНЫ");
+            System.out.println(
+                    DdssDeviceProps.toString(dataList.get(0))
+            );
         } else {
             System.out.println("ДАННЫЕ НЕ СКАЧАНЫ");
         }

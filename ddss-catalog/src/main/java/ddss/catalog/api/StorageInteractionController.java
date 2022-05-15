@@ -49,25 +49,32 @@ public class StorageInteractionController {
             @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
         List<CatalogUser> storageUsers = userRepo.findAllByIsStorage(true);
-        ResponseEntity<CatalogStorage> availableStorage = findAvailableStorage(storageUsers);
+        ResponseEntity<CatalogUser> availableStorageUserResponse = findAvailableStorage(storageUsers);
 
-        if (availableStorage.getStatusCode() == HttpStatus.OK) {
+        if (availableStorageUserResponse.getStatusCode() == HttpStatus.OK) {
             CatalogRecord recordWithSuchId = recordRepo.findById(id).orElse(null);
             if (recordWithSuchId == null) {
                 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
 
             CatalogWithStorageRecord recordWithStorage = new CatalogWithStorageRecord(true);
-            recordWithStorage.setCatalogUser(user);
+            recordWithStorage.setCatalogUser(availableStorageUserResponse.getBody());
             recordWithStorage.setCatalogRecord(recordWithSuchId);
 
             withStorageRecordRepo.save(recordWithStorage);
         }
 
-        return availableStorage;
+        CatalogUser availableStorageUser = availableStorageUserResponse.getBody();
+        CatalogStorage availableStorage = null;
+        if (availableStorageUser != null) {
+            availableStorage = new CatalogStorage(availableStorageUser.getId(), availableStorageUser.getAbout(),
+                    availableStorageUser.getIpAddress(), availableStorageUser.getPort());
+        }
+
+        return new ResponseEntity<>(availableStorage, availableStorageUserResponse.getStatusCode());
     }
 
-    private ResponseEntity<CatalogStorage> findAvailableStorage(List<CatalogUser> storageUsers) {
+    private ResponseEntity<CatalogUser> findAvailableStorage(List<CatalogUser> storageUsers) {
         AvailableMegabytesNumber result;
         for (CatalogUser storageUser : storageUsers) {
 
@@ -80,10 +87,7 @@ public class StorageInteractionController {
             }
 
             if (result.getValue() >= props.getMinAvailableMegabytes()) {
-                return new ResponseEntity<>(
-                        new CatalogStorage(storageUser.getId(), storageUser.getAbout(),
-                                storageUser.getIpAddress(), storageUser.getPort()),
-                        HttpStatus.OK);
+                return new ResponseEntity<>(storageUser, HttpStatus.OK);
             }
         }
 

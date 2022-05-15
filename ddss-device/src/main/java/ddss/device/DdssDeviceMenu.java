@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import static ddss.device.DdssDeviceProps.*;
 import static ddss.device.api.CatalogInteractionController.*;
+import static ddss.device.api.StorageInteractionController.upload;
 
 public class DdssDeviceMenu {
 
@@ -41,6 +42,9 @@ public class DdssDeviceMenu {
                     break;
                 case "3":
                     menuGetAvailableStorage();
+                    break;
+                case "4":
+                    menuUploadData();
                     break;
                 default:
                     break;
@@ -101,6 +105,15 @@ public class DdssDeviceMenu {
         System.out.println("Описание .... " + availableStorage.getAbout());
         System.out.println("IP-адресс ... " + availableStorage.getIpAddress());
         System.out.println("Порт ........ " + availableStorage.getPort());
+        System.out.println();
+    }
+
+    private static void menuUploadData() {
+        if (upload(storageIpAddressWithPort, catalogRecordId, username, password)) {
+            System.out.println("ДАННЫЕ СОХРАНЕНЫ");
+        } else {
+            System.out.println("ДАННЫЕ НЕ СОХРАНЕНЫ");
+        }
         System.out.println();
     }
 }

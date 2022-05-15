@@ -2,7 +2,7 @@ package ddss.catalog.api;
 
 import ddss.catalog.DdssCatalogProps;
 import ddss.catalog.data.CatalogUserRepository;
-import ddss.catalog.domain.AvailableMegabytesNumber;
+import ddss.catalog.data.CatalogWithStorageRecordRepository;
 import ddss.catalog.domain.CatalogStorage;
 import ddss.catalog.domain.CatalogUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,21 @@ public class StorageInteractionController {
 
     private final DdssCatalogProps props;
     private final CatalogUserRepository userRepo;
+    private final CatalogRecordRepository recordRepo;
+    private final CatalogWithStorageRecordRepository recordWithStorageRepo;
 
     private final HttpEntity<AvailableMegabytesNumber> request;
 
     @Autowired
-    public StorageInteractionController(DdssCatalogProps props, CatalogUserRepository userRepo) {
+    public StorageInteractionController(DdssCatalogProps props,
+                                        CatalogUserRepository userRepo,
+                                        CatalogRecordRepository recordRepo,
+                                        CatalogWithStorageRecordRepository recordWithStorageRepo) {
+
         this.props = props;
         this.userRepo = userRepo;
+        this.recordRepo = recordRepo;
+        this.recordWithStorageRepo = recordWithStorageRepo;
 
         HttpHeaders headers = createHeaders(props.getAdminUsername(), props.getAdminPassword());
         request = new HttpEntity<>(new AvailableMegabytesNumber(), headers);

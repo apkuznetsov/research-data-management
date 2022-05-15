@@ -21,4 +21,8 @@ public class CatalogStorage {
         this.ipAddress = ipAddress;
         this.port = port;
     }
+
+    public String toString() {
+        return ipAddress + ":" + port;
+    }
 }

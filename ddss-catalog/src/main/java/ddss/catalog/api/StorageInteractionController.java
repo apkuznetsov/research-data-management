@@ -39,7 +39,10 @@ public class StorageInteractionController {
     public ResponseEntity<CatalogStorage> getAvailableStorage(@AuthenticationPrincipal CatalogUser user) {
 
         List<CatalogUser> storageUsers = userRepo.findAllByIsStorage(true);
+        return findAvailableStorage(storageUsers);
+    }
 
+    private ResponseEntity<CatalogStorage> findAvailableStorage(List<CatalogUser> storageUsers) {
         AvailableMegabytesNumber result;
         for (CatalogUser storageUser : storageUsers) {
 

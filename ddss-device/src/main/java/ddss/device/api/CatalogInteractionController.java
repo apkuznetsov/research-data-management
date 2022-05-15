@@ -59,4 +59,15 @@ public class CatalogInteractionController {
 
         return response.getBody();
     }
+
+    public static CatalogStorage getStorageToDownload(int catalogRecordId, String username, String password) {
+
+        HttpEntity<CatalogStorage> request = new HttpEntity<>(new CatalogStorage(), createHeaders(username, password));
+
+        ResponseEntity<CatalogStorage> response = httpClient
+                .exchange(CAT_STORAGE_TO_DOWNLOAD_URL + "/" + catalogRecordId,
+                        HttpMethod.GET, request, CatalogStorage.class);
+
+        return response.getBody();
+    }
 }

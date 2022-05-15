@@ -92,10 +92,10 @@ public class StorageInteractionController {
 
     @GetMapping(path = "/record/{id}")
     public ResponseEntity<CatalogStorage> getStorageByCatalogRecordId(
-            @PathVariable int catalogRecordId, @AuthenticationPrincipal CatalogUser user) {
+            @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
         CatalogWithStorageRecord withStorageRecord = withStorageRecordRepo
-                .findByCatalogRecordId(catalogRecordId);
+                .findByCatalogRecordId(id);
         if (withStorageRecord == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -112,5 +112,4 @@ public class StorageInteractionController {
                         storage.getIpAddress(), storage.getPort()),
                 HttpStatus.OK);
     }
-
 }

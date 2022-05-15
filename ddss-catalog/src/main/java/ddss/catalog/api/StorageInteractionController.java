@@ -25,7 +25,7 @@ public class StorageInteractionController {
     private final DdssCatalogProps props;
     private final CatalogUserRepository userRepo;
     private final CatalogRecordRepository recordRepo;
-    private final CatalogWithStorageRecordRepository recordWithStorageRepo;
+    private final CatalogWithStorageRecordRepository withStorageRecordRepo;
 
     private final HttpEntity<AvailableMegabytesNumber> request;
 
@@ -33,12 +33,12 @@ public class StorageInteractionController {
     public StorageInteractionController(DdssCatalogProps props,
                                         CatalogUserRepository userRepo,
                                         CatalogRecordRepository recordRepo,
-                                        CatalogWithStorageRecordRepository recordWithStorageRepo) {
+                                        CatalogWithStorageRecordRepository withStorageRecordRepo) {
 
         this.props = props;
         this.userRepo = userRepo;
         this.recordRepo = recordRepo;
-        this.recordWithStorageRepo = recordWithStorageRepo;
+        this.withStorageRecordRepo = withStorageRecordRepo;
 
         HttpHeaders headers = createHeaders(props.getAdminUsername(), props.getAdminPassword());
         request = new HttpEntity<>(new AvailableMegabytesNumber(), headers);
@@ -61,7 +61,7 @@ public class StorageInteractionController {
             recordWithStorage.setCatalogUser(user);
             recordWithStorage.setCatalogRecord(recordWithSuchId);
 
-            recordWithStorageRepo.save(recordWithStorage);
+            withStorageRecordRepo.save(recordWithStorage);
         }
 
         return availableStorage;

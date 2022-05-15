@@ -7,7 +7,8 @@ public class DdssDeviceProps {
     public static final String CAT_CREATE_URL = CAT_URL + "/cat/record/create";
     public static final String CAT_RECORD_URL = CAT_URL + "/cat/record";
     public static final String CAT_AVAILABLE_STORAGE_URL = CAT_URL + "/cat/storage/available";
-    public static final String STORAGE_UPLOAD_URL = CAT_URL + "/storage/upload";
+
+    public static final String STORAGE_UPLOAD_URL = "/storage/upload";
 
     public static final String USERNAME = "admin";
     public static final String PASSWORD = "qwerty";

@@ -1,6 +1,7 @@
 package ddss.device.api;
 
 import ddss.device.domain.CatalogRecord;
+import ddss.device.domain.CatalogStorage;
 import ddss.device.security.RegistrationForm;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -44,6 +45,16 @@ public class CatalogInteractionController {
         HttpEntity<CatalogRecord> request = new HttpEntity<>(new CatalogRecord(), createHeaders(username, password));
         ResponseEntity<CatalogRecord> response = httpClient
                 .exchange(CAT_RECORD_URL + "/" + id, HttpMethod.GET, request, CatalogRecord.class);
+
+        return response.getBody();
+    }
+
+    public static CatalogStorage getAvailableStorage(String username, String password) {
+
+        HttpEntity<CatalogStorage> request = new HttpEntity<>(new CatalogStorage(), createHeaders(username, password));
+
+        ResponseEntity<CatalogStorage> response = httpClient
+                .exchange(CAT_AVAILABLE_STORAGE_URL, HttpMethod.GET, request, CatalogStorage.class);
 
         return response.getBody();
     }

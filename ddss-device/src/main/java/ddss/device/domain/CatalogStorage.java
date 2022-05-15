@@ -12,6 +12,9 @@ public class CatalogStorage {
     private String ipAddress;
     private short port;
 
+    public CatalogStorage() {
+    }
+
     public CatalogStorage(int id, String about, String ipAddress, short port) {
         this.id = id;
         this.about = about;

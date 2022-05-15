@@ -7,11 +7,12 @@ import java.util.Scanner;
 
 import static ddss.device.DdssDeviceProps.*;
 import static ddss.device.api.CatalogInteractionController.*;
+import static ddss.device.api.StorageInteractionController.upload;
 
 public class DdssDeviceMenu {
 
-    private static final String storageIpAddressWithPort = "";
-    private static int catalogRecordId = -1;
+    private static String storageIpAddressWithPort = "";
+    private static Integer catalogRecordId = null;
 
     private static String username = DdssDeviceProps.USERNAME;
     private static String password = DdssDeviceProps.PASSWORD;
@@ -24,8 +25,9 @@ public class DdssDeviceMenu {
 
         do {
             System.out.print("1 -- Зарегистрироваться\n" +
-                    "2 -- Создать запись в Каталоге\n" +
-                    "3 -- Получить адрес доступного Хранилища\n" +
+                    "2 -- Создать запись в Каталоге (ид текущей записи = " + catalogRecordId + ")\n" +
+                    "3 -- Получить адрес доступного Хранилища (адрес Хранилища = " + storageIpAddressWithPort + ")\n" +
+                    "4 -- Отправить в Хранилище тестовые данные (адрес Хранилища = " + storageIpAddressWithPort + ")\n" +
                     "0 -- Выйти\n" +
                     "Выбор ... ");
             m = in.nextLine();
@@ -33,13 +35,16 @@ public class DdssDeviceMenu {
 
             switch (m) {
                 case "1":
-                    menuReg();
+                    menuRegister();
                     break;
                 case "2":
-                    menuCreateRec();
+                    menuCreateRecord();
                     break;
                 case "3":
                     menuGetAvailableStorage();
+                    break;
+                case "4":
+                    menuUploadData();
                     break;
                 default:
                     break;
@@ -49,7 +54,7 @@ public class DdssDeviceMenu {
         in.close();
     }
 
-    private static void menuReg() {
+    private static void menuRegister() {
         System.out.println("Введите:");
         System.out.print("Логин ............... ");
         String newUsername = in.nextLine();
@@ -67,7 +72,7 @@ public class DdssDeviceMenu {
         }
     }
 
-    private static void menuCreateRec() {
+    private static void menuCreateRecord() {
         System.out.println("Введите:");
         System.out.print("Описание ............ ");
         String newAbout = in.nextLine();
@@ -79,11 +84,11 @@ public class DdssDeviceMenu {
             System.out.println("ЗАПИСЬ СОЗДАНА, ЕЁ ID = " + catalogRecordId);
             System.out.println();
 
-            menuGetRecById();
+            menuGetRecordById();
         }
     }
 
-    private static void menuGetRecById() {
+    private static void menuGetRecordById() {
         CatalogRecord catalogRecord = getRecordById(catalogRecordId, username, password);
         System.out.println("Номер ...... " + catalogRecord.getId());
         System.out.println("Описание ... " + catalogRecord.getAbout());
@@ -93,11 +98,22 @@ public class DdssDeviceMenu {
     }
 
     private static void menuGetAvailableStorage() {
-        CatalogStorage availableStorage = getAvailableStorage(username, password);
+        CatalogStorage availableStorage = getAvailableStorage(catalogRecordId, username, password);
+        storageIpAddressWithPort = availableStorage.toString();
+
         System.out.println("Номер ....... " + availableStorage.getId());
         System.out.println("Описание .... " + availableStorage.getAbout());
         System.out.println("IP-адресс ... " + availableStorage.getIpAddress());
         System.out.println("Порт ........ " + availableStorage.getPort());
+        System.out.println();
+    }
+
+    private static void menuUploadData() {
+        if (upload(storageIpAddressWithPort, catalogRecordId, username, password)) {
+            System.out.println("ДАННЫЕ СОХРАНЕНЫ");
+        } else {
+            System.out.println("ДАННЫЕ НЕ СОХРАНЕНЫ");
+        }
         System.out.println();
     }
 }

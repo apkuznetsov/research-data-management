@@ -49,12 +49,13 @@ public class CatalogInteractionController {
         return response.getBody();
     }
 
-    public static CatalogStorage getAvailableStorage(String username, String password) {
+    public static CatalogStorage getAvailableStorage(int catalogRecordId, String username, String password) {
 
         HttpEntity<CatalogStorage> request = new HttpEntity<>(new CatalogStorage(), createHeaders(username, password));
 
         ResponseEntity<CatalogStorage> response = httpClient
-                .exchange(CAT_AVAILABLE_STORAGE_URL, HttpMethod.GET, request, CatalogStorage.class);
+                .exchange(CAT_AVAILABLE_STORAGE_URL + "/" + catalogRecordId,
+                        HttpMethod.GET, request, CatalogStorage.class);
 
         return response.getBody();
     }

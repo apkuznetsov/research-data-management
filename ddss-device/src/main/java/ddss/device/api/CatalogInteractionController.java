@@ -49,7 +49,7 @@ public class CatalogInteractionController {
         return response.getBody();
     }
 
-    public static CatalogStorage getAvailableStorage(int catalogRecordId, String username, String password) {
+    public static CatalogStorage getStorageToUpload(int catalogRecordId, String username, String password) {
 
         HttpEntity<CatalogStorage> request = new HttpEntity<>(new CatalogStorage(), createHeaders(username, password));
 

@@ -56,14 +56,8 @@ public class StorageIntegrationTests extends IntegrationTests {
                 .withBasicAuth(tprops.getUsername(), tprops.getPassword())
                 .exchange(tprops.getUrlUpload() + "/" + tprops.getCatRecIdUploadSensorsData(),
                         HttpMethod.POST, request, Feedback.class);
-        String result = Objects.requireNonNull(
-                response.getBody()).getBytes();
-        SensorsData parsedSensorsData = SensorsData.parseFrom(result.getBytes());
 
         // assert
-        assertEquals(parsedSensorsData.getDegreesCelsius(), protoSensData.getDegreesCelsius());
-        assertEquals(parsedSensorsData.getPascals(), protoSensData.getPascals());
-        assertEquals(parsedSensorsData.getMetersPerSecond(), protoSensData.getMetersPerSecond());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 

@@ -37,6 +37,6 @@ build/
 ddss-device/src/main/protoc.exe
 ddss-storage/src/test/protoc.exe
 
-docker/ddss-catalog/ddss-catalog-0.0.1.jar
-docker/ddss-storage/ddss-storage-0.0.1.jar
-docker/ddss-device/ddss-device-0.0.1.jar
+deployment/ddss-catalog/ddss-catalog-0.0.1.jar
+deployment/ddss-storage/ddss-storage-0.0.1.jar
+deployment/ddss-device/ddss-device-0.0.1.jar

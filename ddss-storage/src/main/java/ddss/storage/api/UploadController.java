@@ -1,9 +1,9 @@
 package ddss.storage.api;
 
 import ddss.storage.data.DepositRepository;
+import ddss.storage.domain.CatalogUser;
 import ddss.storage.domain.Data;
 import ddss.storage.domain.Deposit;
-import ddss.storage.domain.CatalogUser;
 import ddss.storage.domain.Feedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,8 +29,7 @@ public class UploadController {
             @PathVariable int catalogRecordId, @RequestBody Data data, @AuthenticationPrincipal CatalogUser user) {
 
         Feedback feedback = new Feedback(
-                "bytes " + data.getBytes() + " with " + data.getBytes().length() + " length uploaded",
-                data.getBytes());
+                "bytes " + data.getBytes() + " with " + data.getBytes().length() + " length uploaded");
 
         Deposit deposit = new Deposit(catalogRecordId, LocalDateTime.now(), data.getBytes().getBytes());
         depositRepo.save(deposit);

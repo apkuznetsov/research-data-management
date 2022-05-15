@@ -7,11 +7,13 @@ import java.util.Scanner;
 
 import static ddss.device.DdssDeviceProps.*;
 import static ddss.device.api.CatalogInteractionController.*;
+import static ddss.device.api.StorageInteractionController.downloadAll;
 import static ddss.device.api.StorageInteractionController.upload;
 
 public class DdssDeviceMenu {
 
     private static String storageToUploadAddress = "";
+    private static String storageToDownloadAddress = "";
     private static Integer catalogRecordId = null;
 
     private static String username = DdssDeviceProps.USERNAME;
@@ -28,7 +30,8 @@ public class DdssDeviceMenu {
                     "2 -- Создать запись в Каталоге (ид текущей записи = " + catalogRecordId + ")\n" +
                     "3 -- Получить адрес доступного Хранилища (адрес Хранилища = " + storageToUploadAddress + ")\n" +
                     "4 -- Отправить в Хранилище тестовые данные (адрес Хранилища = " + storageToUploadAddress + ")\n" +
-                    "5 -- Получить адрес Хранилища c Записью=" + catalogRecordId + ")\n" +
+                    "5 -- Получить адрес Хранилища c Записью=" + catalogRecordId + "\n" +
+                    "6 -- Получить данные Записи=" + catalogRecordId + " из Хранилища=" + storageToDownloadAddress + "\n" +
                     "0 -- Выйти\n" +
                     "Выбор ... ");
             m = in.nextLine();
@@ -48,7 +51,10 @@ public class DdssDeviceMenu {
                     menuUploadData();
                     break;
                 case "5":
-                    menuUploadData();
+                    menuGetStorageToDownload();
+                    break;
+                case "6":
+                    menuDownloadAllData();
                     break;
                 default:
                     break;
@@ -118,7 +124,17 @@ public class DdssDeviceMenu {
 
     private static void menuGetStorageToDownload() {
         CatalogStorage storageToDownload = getStorageToDownload(catalogRecordId, username, password);
+        storageToDownloadAddress = storageToDownload.toString();
         print(storageToDownload);
+    }
+
+    private static void menuDownloadAllData() {
+        if (downloadAll(storageToDownloadAddress, catalogRecordId, username, password)) {
+            System.out.println("ДАННЫЕ СКАЧАНЫ");
+        } else {
+            System.out.println("ДАННЫЕ НЕ СКАЧАНЫ");
+        }
+        System.out.println();
     }
 
     private static void print(CatalogStorage storage) {

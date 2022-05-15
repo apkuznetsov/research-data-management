@@ -30,7 +30,7 @@ public class StorageInteractionController {
         return response.getStatusCode() == HttpStatus.CREATED;
     }
 
-    public static boolean downloadAll(String ipAddressWithPort, int catalogRecordId, String username, String password) {
+    public static List<Data> downloadAll(String ipAddressWithPort, int catalogRecordId, String username, String password) {
 
         HttpEntity<List<Data>> request = new HttpEntity<>(new ArrayList<Data>(), createHeaders(username, password));
 
@@ -39,6 +39,6 @@ public class StorageInteractionController {
                         HttpMethod.GET, request, new ParameterizedTypeReference<List<Data>>() {
                         });
 
-        return response.getStatusCode() == HttpStatus.OK;
+        return response.getBody();
     }
 }

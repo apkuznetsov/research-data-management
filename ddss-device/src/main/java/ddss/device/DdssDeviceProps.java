@@ -10,6 +10,7 @@ public class DdssDeviceProps {
     public static final String CAT_STORAGE_TO_DOWNLOAD_URL = CAT_URL + "/cat/storage/record";
 
     public static final String STORAGE_UPLOAD_URL = "/storage/upload";
+    public static final String STORAGE_DOWNLOAD_ALL_URL = "/storage/download/all";
 
     public static final String USERNAME = "admin";
     public static final String PASSWORD = "qwerty";

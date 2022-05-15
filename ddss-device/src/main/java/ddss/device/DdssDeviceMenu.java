@@ -34,10 +34,10 @@ public class DdssDeviceMenu {
 
             switch (m) {
                 case "1":
-                    menuReg();
+                    menuRegister();
                     break;
                 case "2":
-                    menuCreateRec();
+                    menuCreateRecord();
                     break;
                 case "3":
                     menuGetAvailableStorage();
@@ -50,7 +50,7 @@ public class DdssDeviceMenu {
         in.close();
     }
 
-    private static void menuReg() {
+    private static void menuRegister() {
         System.out.println("Введите:");
         System.out.print("Логин ............... ");
         String newUsername = in.nextLine();
@@ -68,7 +68,7 @@ public class DdssDeviceMenu {
         }
     }
 
-    private static void menuCreateRec() {
+    private static void menuCreateRecord() {
         System.out.println("Введите:");
         System.out.print("Описание ............ ");
         String newAbout = in.nextLine();
@@ -80,11 +80,11 @@ public class DdssDeviceMenu {
             System.out.println("ЗАПИСЬ СОЗДАНА, ЕЁ ID = " + catalogRecordId);
             System.out.println();
 
-            menuGetRecById();
+            menuGetRecordById();
         }
     }
 
-    private static void menuGetRecById() {
+    private static void menuGetRecordById() {
         CatalogRecord catalogRecord = getRecordById(catalogRecordId, username, password);
         System.out.println("Номер ...... " + catalogRecord.getId());
         System.out.println("Описание ... " + catalogRecord.getAbout());

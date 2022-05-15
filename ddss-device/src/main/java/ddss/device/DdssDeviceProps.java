@@ -1,5 +1,8 @@
 package ddss.device;
 
+import ddss.device.domain.Data;
+import ddss.device.proto.SensorsData;
+
 public class DdssDeviceProps {
 
     public static final String CAT_URL = "http://localhost:8080";
@@ -18,4 +21,10 @@ public class DdssDeviceProps {
     public static final short PORT = 2048;
 
     public static final String PROTO_SCHEME = "message SensorData { int32 data = 1; }";
+
+    public static final SensorsData protoSensData = SensorsData.newBuilder()
+            .setDegreesCelsius(44)
+            .setPascals(12)
+            .setMetersPerSecond(13).build();
+    public static final Data data = new Data(protoSensData.toByteArray());
 }

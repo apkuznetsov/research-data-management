@@ -114,7 +114,7 @@ public class DdssDeviceMenu {
     }
 
     private static void menuUploadData() {
-        if (upload(storageToUploadAddress, catalogRecordId, username, password)) {
+        if (upload(data, storageToUploadAddress, catalogRecordId, username, password)) {
             System.out.println("ДАННЫЕ СОХРАНЕНЫ");
         } else {
             System.out.println("ДАННЫЕ НЕ СОХРАНЕНЫ");

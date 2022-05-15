@@ -1,15 +1,16 @@
 package ddss.catalog.api;
 
 import ddss.catalog.DdssCatalogProps;
+import ddss.catalog.data.CatalogRecordRepository;
 import ddss.catalog.data.CatalogUserRepository;
 import ddss.catalog.data.CatalogWithStorageRecordRepository;
-import ddss.catalog.domain.CatalogStorage;
-import ddss.catalog.domain.CatalogUser;
+import ddss.catalog.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -43,11 +44,27 @@ public class StorageInteractionController {
         request = new HttpEntity<>(new AvailableMegabytesNumber(), headers);
     }
 
-    @GetMapping(path = "/available")
-    public ResponseEntity<CatalogStorage> getAvailableStorage(@AuthenticationPrincipal CatalogUser user) {
+    @GetMapping(path = "/available/{id}")
+    public ResponseEntity<CatalogStorage> getAvailableStorageAndPrepareUploading(
+            @PathVariable int id, @AuthenticationPrincipal CatalogUser user) {
 
         List<CatalogUser> storageUsers = userRepo.findAllByIsStorage(true);
-        return findAvailableStorage(storageUsers);
+        ResponseEntity<CatalogStorage> availableStorage = findAvailableStorage(storageUsers);
+
+        if (availableStorage.getStatusCode() == HttpStatus.OK) {
+            CatalogRecord recordWithSuchId = recordRepo.findById(id).orElse(null);
+            if (recordWithSuchId == null) {
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+
+            CatalogWithStorageRecord recordWithStorage = new CatalogWithStorageRecord(true);
+            recordWithStorage.setCatalogUser(user);
+            recordWithStorage.setCatalogRecord(recordWithSuchId);
+
+            recordWithStorageRepo.save(recordWithStorage);
+        }
+
+        return availableStorage;
     }
 
     private ResponseEntity<CatalogStorage> findAvailableStorage(List<CatalogUser> storageUsers) {

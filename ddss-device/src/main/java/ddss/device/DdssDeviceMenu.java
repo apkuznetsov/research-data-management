@@ -10,7 +10,7 @@ import static ddss.device.api.CatalogInteractionController.*;
 
 public class DdssDeviceMenu {
 
-    private static final String storageIpAddressWithPort = "";
+    private static String storageIpAddressWithPort = "";
     private static Integer catalogRecordId = null;
 
     private static String username = DdssDeviceProps.USERNAME;
@@ -94,7 +94,9 @@ public class DdssDeviceMenu {
     }
 
     private static void menuGetAvailableStorage() {
-        CatalogStorage availableStorage = getAvailableStorage(username, password);
+        CatalogStorage availableStorage = getAvailableStorage(catalogRecordId, username, password);
+        storageIpAddressWithPort = availableStorage.toString();
+
         System.out.println("Номер ....... " + availableStorage.getId());
         System.out.println("Описание .... " + availableStorage.getAbout());
         System.out.println("IP-адресс ... " + availableStorage.getIpAddress());

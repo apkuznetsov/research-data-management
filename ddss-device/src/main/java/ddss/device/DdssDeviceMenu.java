@@ -47,7 +47,7 @@ public class DdssDeviceMenu {
                     menuCreateRecord();
                     break;
                 case "3":
-                    menuGetAvailableStorage();
+                    menuGetStorageToUpload();
                     break;
                 case "4":
                     menuUploadData();
@@ -109,8 +109,8 @@ public class DdssDeviceMenu {
         System.out.println();
     }
 
-    private static void menuGetAvailableStorage() {
-        CatalogStorage storageToUpload = getAvailableStorage(catalogRecordId, username, password);
+    private static void menuGetStorageToUpload() {
+        CatalogStorage storageToUpload = getStorageToUpload(catalogRecordId, username, password);
         storageToUploadAddress = storageToUpload.toString();
         print(storageToUpload);
     }

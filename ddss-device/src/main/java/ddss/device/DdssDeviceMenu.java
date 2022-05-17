@@ -3,6 +3,7 @@ package ddss.device;
 import ddss.device.domain.CatalogRecord;
 import ddss.device.domain.CatalogStorage;
 import ddss.device.domain.Data;
+import ddss.device.simulation.DeviceSimulation;
 
 import java.util.List;
 import java.util.Scanner;
@@ -116,7 +117,7 @@ public class DdssDeviceMenu {
     }
 
     private static void menuUploadData() {
-        if (upload(data, storageToUploadAddress, catalogRecordId, username, password)) {
+        if (upload(DeviceSimulation.DATA, storageToUploadAddress, catalogRecordId, username, password)) {
             System.out.println("ДАННЫЕ СОХРАНЕНЫ");
         } else {
             System.out.println("ДАННЫЕ НЕ СОХРАНЕНЫ");
@@ -135,7 +136,7 @@ public class DdssDeviceMenu {
         if (dataList != null) {
             System.out.println("ДАННЫЕ СКАЧАНЫ");
             System.out.println(
-                    DdssDeviceProps.toString(dataList.get(0))
+                    DeviceSimulation.toString(dataList.get(0))
             );
         } else {
             System.out.println("ДАННЫЕ НЕ СКАЧАНЫ");

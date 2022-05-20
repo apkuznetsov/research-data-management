@@ -8,13 +8,11 @@ import lombok.Setter;
 public class Feedback {
 
     private String message;
-    private String bytes;
 
     public Feedback() {
     }
 
-    public Feedback(String message, String bytes) {
+    public Feedback(String message) {
         this.message = message;
-        this.bytes = bytes;
     }
 }

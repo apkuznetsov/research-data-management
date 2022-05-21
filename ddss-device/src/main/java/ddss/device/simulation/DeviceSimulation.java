@@ -6,19 +6,19 @@ import ddss.device.proto.SensorsData;
 
 public class DeviceSimulation {
 
-    private static final int DEFAULT_DEGREES_CELSIUS = 44;
-    private static final int DEFAULT_PASCALS = 12;
-    private static final int DEFAULT_METERS_PER_SECOND = 13;
+    public static final int DEFAULT_DEGREES_CELSIUS = 44;
+    public static final int DEFAULT_PASCALS = 12;
+    public static final int DEFAULT_METERS_PER_SECOND = 13;
+
+    public static final int DEFAULT_DEGREES_DEVIATION = 2;
+    public static final int DEFAULT_PASCALS_DEVIATION = 100;
+    public static final int DEFAULT_METERS_PER_SECOND_DEVIATION = 4;
 
     public static final SensorsData PROTO_SENSORS_DATA = SensorsData.newBuilder()
             .setDegreesCelsius(DEFAULT_DEGREES_CELSIUS)
             .setPascals(DEFAULT_PASCALS)
             .setMetersPerSecond(DEFAULT_METERS_PER_SECOND).build();
     public static final Data DATA = new Data(PROTO_SENSORS_DATA.toByteArray());
-
-    private static final int DEFAULT_DEGREES_DEVIATION = 2;
-    private static final int DEFAULT_PASCALS_DEVIATION = 100;
-    private static final int DEFAULT_METERS_PER_SECOND_DEVIATION = 4;
 
     public static String toString(Data data) {
         String stringDataBytes = data.getBytes();

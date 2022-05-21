@@ -3,9 +3,11 @@ package ddss.device;
 import ddss.device.domain.CatalogRecord;
 import ddss.device.domain.CatalogStorage;
 import ddss.device.domain.Data;
+import ddss.device.simulation.DeviceSimulation;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import static ddss.device.DdssDeviceProps.*;
 import static ddss.device.api.CatalogInteractionController.*;
@@ -34,6 +36,7 @@ public class DdssDeviceMenu {
                     "4 -- Отправить в Хранилище тестовые данные (адрес Хранилища = " + storageToUploadAddress + ")\n" +
                     "5 -- Получить адрес Хранилища c Записью=" + catalogRecordId + "\n" +
                     "6 -- Получить данные Записи=" + catalogRecordId + " из Хранилища=" + storageToDownloadAddress + "\n" +
+                    "7 -- Имитировать работу датчика" + "\n" +
                     "0 -- Выйти\n" +
                     "Выбор ... ");
             m = in.nextLine();
@@ -57,6 +60,9 @@ public class DdssDeviceMenu {
                     break;
                 case "6":
                     menuDownloadAllData();
+                    break;
+                case "7":
+                    menuSimulation();
                     break;
                 default:
                     break;
@@ -116,7 +122,7 @@ public class DdssDeviceMenu {
     }
 
     private static void menuUploadData() {
-        if (upload(data, storageToUploadAddress, catalogRecordId, username, password)) {
+        if (upload(DeviceSimulation.generateData(), storageToUploadAddress, catalogRecordId, username, password)) {
             System.out.println("ДАННЫЕ СОХРАНЕНЫ");
         } else {
             System.out.println("ДАННЫЕ НЕ СОХРАНЕНЫ");
@@ -134,13 +140,50 @@ public class DdssDeviceMenu {
         List<Data> dataList = downloadAll(storageToDownloadAddress, catalogRecordId, username, password);
         if (dataList != null) {
             System.out.println("ДАННЫЕ СКАЧАНЫ");
-            System.out.println(
-                    DdssDeviceProps.toString(dataList.get(0))
-            );
+            System.out.println();
+
+            for (Data d : dataList) {
+                System.out.println(DeviceSimulation.toString(d));
+                System.out.println();
+            }
         } else {
             System.out.println("ДАННЫЕ НЕ СКАЧАНЫ");
+            System.out.println();
         }
-        System.out.println();
+    }
+
+    private static void menuSimulation() {
+        String newAbout = "about " + username;
+
+        // создание записи
+        catalogRecordId = -1;
+        catalogRecordId = createRecord(newAbout, PROTO_SCHEME, username, password);
+        if (catalogRecordId >= 0) {
+            System.out.println("ЗАПИСЬ СОЗДАНА, ЕЁ ID = " + catalogRecordId);
+            System.out.println();
+
+            menuGetRecordById();
+        }
+
+        // получение доступного хранилища для загрузки
+        menuGetStorageToUpload();
+
+        // генерация и загрузка
+        for (int i = 0; i < DeviceSimulation.DEFAULT_REPETITIONS_NUMBER; i++) {
+            menuUploadData();
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        // получение доступного хранилища для скачивания
+        menuGetStorageToDownload();
+
+        // скачивание
+        menuDownloadAllData();
     }
 
     private static void print(CatalogStorage storage) {

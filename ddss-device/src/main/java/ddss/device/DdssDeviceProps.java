@@ -1,9 +1,5 @@
 package ddss.device;
 
-import com.google.protobuf.InvalidProtocolBufferException;
-import ddss.device.domain.Data;
-import ddss.device.proto.SensorsData;
-
 public class DdssDeviceProps {
 
     public static final String CAT_URL = "http://localhost:8080";
@@ -22,25 +18,4 @@ public class DdssDeviceProps {
     public static final short PORT = 2048;
 
     public static final String PROTO_SCHEME = "message SensorData { int32 data = 1; }";
-
-    public static final SensorsData protoSensData = SensorsData.newBuilder()
-            .setDegreesCelsius(44)
-            .setPascals(12)
-            .setMetersPerSecond(13).build();
-    public static final Data data = new Data(protoSensData.toByteArray());
-
-    public static String toString(Data data) {
-        String stringDataBytes = data.getBytes();
-
-        SensorsData parsedSensorsData = null;
-        try {
-            parsedSensorsData = SensorsData.parseFrom(stringDataBytes.getBytes());
-        } catch (InvalidProtocolBufferException ignored) {
-        }
-
-        if (parsedSensorsData == null) return "";
-        return "Температура (градусы Цельсия) ...... " + parsedSensorsData.getDegreesCelsius() + "\n" +
-                "Давление (паскали) ................. " + parsedSensorsData.getPascals() + "\n" +
-                "Скорость ветра (метры в секунду) ... " + parsedSensorsData.getMetersPerSecond();
-    }
 }

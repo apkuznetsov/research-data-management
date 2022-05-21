@@ -49,6 +49,10 @@ public class DeviceSimulation {
                 .setMetersPerSecond(randomMetersPerSecondDeviation).build();
     }
 
+    public static Data generateData() {
+        return new Data(generateSensorsData().toByteArray());
+    }
+
     private static int generateRandomInt(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }

@@ -11,7 +11,7 @@ public class DeviceSimulation {
     public static final int DEFAULT_METERS_PER_SECOND = 13;
 
     public static final int DEFAULT_DEGREES_DEVIATION = 2;
-    public static final int DEFAULT_PASCALS_DEVIATION = 100;
+    public static final int DEFAULT_PASCALS_DEVIATION = 5;
     public static final int DEFAULT_METERS_PER_SECOND_DEVIATION = 4;
 
     public static final int DEFAULT_REPETITIONS_NUMBER = 10;

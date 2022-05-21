@@ -140,13 +140,16 @@ public class DdssDeviceMenu {
         List<Data> dataList = downloadAll(storageToDownloadAddress, catalogRecordId, username, password);
         if (dataList != null) {
             System.out.println("ДАННЫЕ СКАЧАНЫ");
+            System.out.println();
+
             for (Data d : dataList) {
                 System.out.println(DeviceSimulation.toString(d));
+                System.out.println();
             }
         } else {
             System.out.println("ДАННЫЕ НЕ СКАЧАНЫ");
+            System.out.println();
         }
-        System.out.println();
     }
 
     private static void menuSimulation() {

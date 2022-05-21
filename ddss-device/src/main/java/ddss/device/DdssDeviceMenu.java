@@ -61,6 +61,9 @@ public class DdssDeviceMenu {
                 case "6":
                     menuDownloadAllData();
                     break;
+                case "7":
+                    menuSimulation();
+                    break;
                 default:
                     break;
             }

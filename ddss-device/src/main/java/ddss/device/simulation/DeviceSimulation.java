@@ -29,4 +29,8 @@ public class DeviceSimulation {
                 "Давление (паскали) ................. " + parsedSensorsData.getPascals() + "\n" +
                 "Скорость ветра (метры в секунду) ... " + parsedSensorsData.getMetersPerSecond();
     }
+
+    private static int generateRandomInt(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
 }

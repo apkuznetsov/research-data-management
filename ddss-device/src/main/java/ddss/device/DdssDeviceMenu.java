@@ -150,14 +150,7 @@ public class DdssDeviceMenu {
     }
 
     private static void menuSimulation() {
-        // регистрация пользователя
-        username = "user" + System.currentTimeMillis();
         String newAbout = "about " + username;
-        if (register(username, PASSWORD, newAbout,
-                IP_ADDRESS, PORT, false)) {
-            System.out.println("ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН");
-            System.out.println();
-        }
 
         // создание записи
         catalogRecordId = -1;

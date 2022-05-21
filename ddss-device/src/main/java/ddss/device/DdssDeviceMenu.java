@@ -7,6 +7,7 @@ import ddss.device.simulation.DeviceSimulation;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import static ddss.device.DdssDeviceProps.*;
 import static ddss.device.api.CatalogInteractionController.*;
@@ -35,6 +36,7 @@ public class DdssDeviceMenu {
                     "4 -- Отправить в Хранилище тестовые данные (адрес Хранилища = " + storageToUploadAddress + ")\n" +
                     "5 -- Получить адрес Хранилища c Записью=" + catalogRecordId + "\n" +
                     "6 -- Получить данные Записи=" + catalogRecordId + " из Хранилища=" + storageToDownloadAddress + "\n" +
+                    "7 -- Имитировать работу датчика" + "\n" +
                     "0 -- Выйти\n" +
                     "Выбор ... ");
             m = in.nextLine();
@@ -140,6 +142,44 @@ public class DdssDeviceMenu {
             System.out.println("ДАННЫЕ НЕ СКАЧАНЫ");
         }
         System.out.println();
+    }
+
+    private static void menuSimulation() {
+        // регистрация пользователя
+        username = "user" + System.currentTimeMillis();
+        String newAbout = "about " + username;
+        if (register(username, PASSWORD, newAbout,
+                IP_ADDRESS, PORT, false)) {
+            System.out.println("ПОЛЬЗОВАТЕЛЬ ЗАРЕГИСТРИРОВАН");
+            System.out.println();
+        }
+
+        // создание записи
+        catalogRecordId = -1;
+        catalogRecordId = createRecord(newAbout, PROTO_SCHEME, username, password);
+        if (catalogRecordId >= 0) {
+            System.out.println("ЗАПИСЬ СОЗДАНА, ЕЁ ID = " + catalogRecordId);
+            System.out.println();
+
+            menuGetRecordById();
+        }
+
+        // получение доступного хранилища для загрузки
+        menuGetStorageToUpload();
+
+        // генерация и отправка данных
+        for (int i = 0; i < DeviceSimulation.DEFAULT_REPETITIONS_NUMBER; i++) {
+            menuUploadData();
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        // получение доступного хранилища для скачивания
+        menuGetStorageToDownload();
     }
 
     private static void print(CatalogStorage storage) {

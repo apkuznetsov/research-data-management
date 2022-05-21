@@ -168,7 +168,7 @@ public class DdssDeviceMenu {
         // получение доступного хранилища для загрузки
         menuGetStorageToUpload();
 
-        // генерация и отправка данных
+        // генерация и загрузка
         for (int i = 0; i < DeviceSimulation.DEFAULT_REPETITIONS_NUMBER; i++) {
             menuUploadData();
 
@@ -181,6 +181,9 @@ public class DdssDeviceMenu {
 
         // получение доступного хранилища для скачивания
         menuGetStorageToDownload();
+
+        // скачивание
+        menuDownloadAllData();
     }
 
     private static void print(CatalogStorage storage) {

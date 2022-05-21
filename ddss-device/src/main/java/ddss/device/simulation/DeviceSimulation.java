@@ -14,6 +14,8 @@ public class DeviceSimulation {
     public static final int DEFAULT_PASCALS_DEVIATION = 100;
     public static final int DEFAULT_METERS_PER_SECOND_DEVIATION = 4;
 
+    public static final int DEFAULT_REPETITIONS_NUMBER = 10;
+
     public static final SensorsData PROTO_SENSORS_DATA = SensorsData.newBuilder()
             .setDegreesCelsius(DEFAULT_DEGREES_CELSIUS)
             .setPascals(DEFAULT_PASCALS)

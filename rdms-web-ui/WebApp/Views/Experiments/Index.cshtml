@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Webapp.Models.ExperimentNameViewModel>
+
+@{
+    ViewData["Title"] = "Список экспериментов";
+}
+
+<h1>Список экспериментов</h1>
+
+<p>
+    <a asp-action="Create">Создать новый эксперимент</a>
+</p>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Tests"
+                       asp-action="Experiment" 
+                       asp-route-id="@item.ExperimentId">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

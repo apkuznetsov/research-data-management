@@ -1,0 +1,51 @@
+﻿@model Webapp.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<h4>Регистрация</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Register" asp-controller="Account" asp-anti-forgery="true">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Введите эл. почту</label><br />
+                <input type="text" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Введите пароль</label><br />
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label">Повторите пароль</label><br />
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label">Фамилия</label><br />
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Forename" class="control-label">Имя</label><br />
+                <input asp-for="Forename" class="form-control" />
+                <span asp-validation-for="Forename" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Регистрация" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>

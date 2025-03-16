@@ -1,0 +1,60 @@
+@model Webapp.Models.SensorCreateViewModel
+
+@{
+    ViewData["Title"] = "Создать датчик";
+}
+
+<h4>Создать датчик</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Metadata" class="control-label"></label>
+                <input asp-for="Metadata" class="form-control" />
+                <span asp-validation-for="Metadata" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataType" class="control-label"></label>
+                <input asp-for="DataType" class="form-control" />
+                <span asp-validation-for="DataType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CommunicationProtocolId" class="control-label"></label>
+                <select asp-for="CommunicationProtocolId" class ="form-control" asp-items="ViewBag.CommunicationProtocolId"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IpAddress" class="control-label"></label>
+                <input asp-for="IpAddress" class="form-control" />
+                <span asp-validation-for="IpAddress" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Port" class="control-label"></label>
+                <input asp-for="Port" class="form-control" />
+                <span asp-validation-for="Port" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться к списку датчиков</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

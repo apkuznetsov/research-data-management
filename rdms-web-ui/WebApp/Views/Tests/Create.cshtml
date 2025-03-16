@@ -1,0 +1,72 @@
+﻿@model Webapp.Models.Tests.TestCreateViewModel
+
+@{
+    ViewData["Title"] = "Создать измерение";
+}
+
+<h4>Создать измерение</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Metadata" class="control-label"></label>
+                <input asp-for="Metadata" class="form-control" />
+                <span asp-validation-for="Metadata" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DurationSeconds" class="control-label"></label>
+                <input asp-for="DurationSeconds" class="form-control" />
+                <span asp-validation-for="DurationSeconds" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="ExperimentId" />
+
+            <div class="form-group">
+                <input type="hidden" asp-for="ExperimentName" />
+                <label asp-for="ExperimentName" class="control-label"></label>
+                <a asp-controller="Experiments"
+                   asp-action="Details"
+                   asp-route-id="@Model.ExperimentId">
+                    @Html.DisplayFor(model => model.ExperimentName)
+                </a>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" asp-for="ExperimentSensorName" />
+                <label asp-for="ExperimentSensorName" class="control-label"></label>
+                <a asp-controller="Sensors"
+                   asp-action="Details"
+                   asp-route-id="@Model.ExperimentSensorId">
+                    @Html.DisplayFor(model => model.ExperimentSensorName)
+                </a>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Провести измерение" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Tests"
+       asp-action="Experiment"
+       asp-route-id="@Model.ExperimentId">
+        Вернуться к списку измерений эксперимента
+    </a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

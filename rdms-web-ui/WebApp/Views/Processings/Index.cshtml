@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Webapp.Models.ProcessingNameViewModel>
+
+@{
+    ViewData["Title"] = "Список сеансов обработки";
+}
+
+<h1>Список сеансов обработки</h1>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Processings"
+                       asp-action="Details"
+                       asp-route-id="@item.ProcessingId">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

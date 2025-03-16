@@ -1,0 +1,75 @@
+﻿@model Webapp.Models.Tests.TestDeleteViewModel
+
+@{
+    ViewData["Title"] = "Удалить измерение";
+}
+
+<div>
+    <h4>Удалить измерение</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Metadata)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Metadata)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartedTime)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndedTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndedTime)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ExperimentName)
+        </dt>
+        <dd class="col-sm-10">
+
+            <a asp-controller="Experiments"
+               asp-action="Details"
+               asp-route-id="@Model.ExperimentId">
+                @Html.DisplayFor(model => model.ExperimentName)
+            </a>
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ExperimentSensorName)
+        </dt>
+        <dd class="col-sm-10">
+            <a asp-controller="Sensors"
+               asp-action="Details"
+               asp-route-id="@Model.ExperimentSensorId">
+                @Html.DisplayFor(model => model.ExperimentSensorName)
+            </a>
+        </dd>
+    </dl>
+
+    <form asp-controller="Tests"
+          asp-action="Delete">
+        <input type="hidden" asp-for="TestId" />
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+
+        <a asp-controller="Tests"
+           asp-action="Experiment"
+           asp-route-id="@Model.ExperimentId">
+            Вернуться к списку измерений эксперимента
+        </a>
+    </form>
+</div>
